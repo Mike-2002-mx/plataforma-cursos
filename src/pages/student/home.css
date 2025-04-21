@@ -1,0 +1,10 @@
+.contenedor__cursos__inscritos{
+    display: flex;
+    flex-flow: row wrap;
+
+}
+
+.contenedor__cursos__disponibles{
+    display: flex;
+    flex-flow: row wrap;
+}

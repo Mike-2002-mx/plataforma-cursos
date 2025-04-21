@@ -1,0 +1,68 @@
+/* Fondo general opcional */
+body {
+    background-color: #f0f4f8;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+  /* Contenedor principal */
+.contenedor_registro {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+  /* Título */
+.contenedor_registro h2 {
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+  /* Mensaje */
+.contenedor_registro p {
+    color: #cc0000;
+    margin-bottom: 10px;
+}
+
+  /* Estilo de formulario */
+.formulario__registro {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+  /* Inputs y select */
+.input__registro,
+.seleccion__registro {
+    padding: 12px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input__registro:focus,
+.seleccion__registro:focus {
+    border-color: #007bff;
+}
+  /* Botón */
+.boton__registrar {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton__registrar:hover {
+    background-color: #0056b3;
+}
