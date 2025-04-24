@@ -29,7 +29,7 @@ const Login = () =>{
                 } else{
                     navigate('/home');
                 }
-            }, 2000);
+            }, 500);
 
         } catch (error) {
             setError( 'Credenciales inválidas')
@@ -69,7 +69,7 @@ const Login = () =>{
                 <button 
                     type="submit" 
                     className="boton__iniciar__sesion"
-                    // disabled={loading}
+                    //disabled={loading}
                 >
                     Iniciar sesion
                 </button>

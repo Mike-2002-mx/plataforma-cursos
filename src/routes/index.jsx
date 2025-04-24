@@ -2,12 +2,14 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 //Páginas publicas
-import Landing from '../pages/auth/Landing';
 import Login from '../pages/auth/Login';
 import Register from "../pages/auth/Register";
 import Dashboard from "../pages/instructor/Dashboard";
 import Home from "../pages/student/Home";
 import Prueba from "../Prueba";
+import VistaCurso from "../pages/student/VistaCurso";
+import PaginaTema from "../pages/student/PaginaTema";
+import PaginaLeccion from "../pages/student/PaginaLeccion";
 
 
 const ProtectedRoute = ({children}) =>{
@@ -24,6 +26,9 @@ const AppRoutes = () =>{
             <Route path="/prueba" element={<Prueba/>}/>
             <Route path="/home" element={<Home/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/curso" element={<VistaCurso/>}/>
+            <Route path="/tema" element={<PaginaTema/>}/>
+            <Route path="/leccion" element={<PaginaLeccion/>}/>
 
              {/* Rutas protegidas student */}
             {/* <Route path="/home" element={

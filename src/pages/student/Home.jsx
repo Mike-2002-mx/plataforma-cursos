@@ -4,14 +4,21 @@ import { useAuth } from "../../context/AuthContext";
 import Header from "../../components/Header";
 import TarjetaCurso from "../../components/TarjetaCurso";
 import TarjetaAvance from "../../components/TarjetaAvance";
+import VistaCurso from "./VistaCurso";
 import axios from "axios";
 import './home.css';
 
 const Home =  () =>{
     const [cursos, setCursos] = useState([]);
     const [cursosInscritosId, setcursosInscritosId] = useState([]);
+    const [username, setUserName] = useState('');
     const token = localStorage.getItem('token');
     const idUsuario = localStorage.getItem('id');
+    const navigate = useNavigate();
+
+    useEffect(() =>{
+        setUserName(localStorage.getItem('username'));
+    },[]);
 
     useEffect(() =>{
         const obtenerCursos = async () =>{ 
@@ -46,7 +53,6 @@ const Home =  () =>{
                     });
                     const cursosId = response.data.map(e => e.idCourse);
                     setcursosInscritosId(cursosId);
-                    console.log(cursosId);
                 } catch (error) {
                     console.error('Error al obtener inscripciones:', error);
                 }
@@ -58,9 +64,34 @@ const Home =  () =>{
     const cursosInscritos = cursos.filter(curso => cursosInscritosId.includes(curso.id));
     const cursosDisponibles = cursos.filter(curso => !cursosInscritosId.includes(curso.id));
 
+    const persistirCurso = (curso) =>{
+        localStorage.setItem('cursoActual', JSON.stringify(curso));
+        navigate("/curso");
+    }
+
+    const realizarInscripcion = async (idUsuario, idCurso, curso) =>{
+        try {
+            const response = await axios.post(
+                'http://localhost:8080/enrollments',
+                { idUser: idUsuario, idCourse: idCurso },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            localStorage.setItem('cursoActual', JSON.stringify(curso));
+            console.log(response.data)
+            navigate("/curso");
+        } catch (error) {
+            console.log('Error al obtener inscripciones: ', error);
+        }
+    }
+
     return (
         <>
-            <Header/>
+            <Header username={username}/>
+            <h2 className="bienvenida__mensaje">Bienvenida {username}</h2>
             <h2>Mis cursos</h2>
             <div className="contenedor__cursos__inscritos">
                 {cursosInscritos.map(curso => (
@@ -69,6 +100,7 @@ const Home =  () =>{
                         isInscrito={true}
                         portada={curso.imageUrl}
                         nombreCurso={curso.title}
+                        onAction={() => persistirCurso(curso)}
                     />
                 ))}
             </div>
@@ -80,6 +112,7 @@ const Home =  () =>{
                         isInscrito={false}
                         portada={curso.imageUrl}
                         nombreCurso={curso.title}
+                        onAction={() => realizarInscripcion(idUsuario, curso.id, curso)}
                     />
                 ))}
             </div>

@@ -7,8 +7,9 @@
     transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     margin: 1rem;
     /* border: 1px solid #07004D; */
 }
@@ -26,7 +27,7 @@
 }
 
 .tarjeta__curso strong {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #1a73e8;
     margin-bottom: 0.5rem;
     font-weight: 600;

@@ -1,9 +1,10 @@
 .encabezado{
     background-color: #30107A;
     margin: 0;
-    border: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     min-height: 80px;

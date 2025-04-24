@@ -45,6 +45,7 @@ const RegisterForm = () => {
             }
     };
     const [message, setMessage] = useState('');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -68,7 +69,7 @@ const RegisterForm = () => {
         setMessage('Registro exitoso');
         setTimeout(()=> {
             navigate('/login');
-        });
+        }, 1000);
 
         console.log('Respuesta del servidor:', response.data);
         } catch (error) {
@@ -79,7 +80,7 @@ const RegisterForm = () => {
 
     return (
         <div className="contenedor_registro">
-                <h2>Registro</h2>
+                <h2>Ingresa tus datos</h2>
                 {message && <p>{message}</p>}
                 <form onSubmit={handleSubmit} className="formulario__registro">
                     <input
