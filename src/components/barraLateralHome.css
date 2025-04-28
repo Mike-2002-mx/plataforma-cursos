@@ -1,0 +1,100 @@
+/* Sidebar Styles */
+.sidebar {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    padding: 24px 16px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-left: 8px;
+}
+
+.logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.course-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gray-dark);
+}
+
+.menu-section {
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 14px;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    padding-left: 8px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 4px;
+}
+
+.btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: #1765CC;
+    box-shadow: var(--shadow-hover);
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 16px;
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: var(--gray-light);
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+.user-info h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}

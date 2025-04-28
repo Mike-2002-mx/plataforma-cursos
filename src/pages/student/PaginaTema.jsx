@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../../components/Header";
 import DetallesLeccion from "../../components/DetallesLeccion";
+import BarraLateralHome from "../../components/BarraLateralHome";
 import './paginaTema.css';
 import { useEffect } from "react";
 import axios from "axios";
@@ -43,20 +44,42 @@ const PaginaTema = () => {
 
     return(
         <>
-            <Header/>
-            <h2>Tema: {temaTitle}</h2>
-            <h2>{temaDescription}</h2>
-            <h2>Lecciones</h2>
-            {lecciones.map(leccion => (
+            <div className="dashboard">
+                <BarraLateralHome/>
+                <div className="main-content">
+                    <div className="lesson-header">
+                        <h1>Tema: {temaTitle}</h1>
+                        <h2><h2>{temaDescription}</h2></h2>
+                        <div className="progress-container">
+                            <div className="progress-bar"></div>
+                        </div>
+                        <p className="progress-text">60% completado</p>
+                    </div>
+                    <div className="lesson-content">
+                        <h2>Contenido de la lección</h2>
+                        {lecciones.map(leccion => (
+                            <DetallesLeccion 
+                                key={leccion.id}
+                                nombreLeccion={leccion.title}
+                                isComplete={false}
+                                isVideo={true}
+                                onAction={() => verLeccion(leccion)}
+                            /> 
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default PaginaTema;
+
+/*          {lecciones.map(leccion => (
                 <DetallesLeccion 
                     key={leccion.id}
                     nombreLeccion={leccion.title}
                     isComplete={false}
                     onAction={()=>verLeccion(leccion)}
                 />
-            ))}
-        </>
-    )
-}
-
-export default PaginaTema;
+            ))}*/

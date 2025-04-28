@@ -1,0 +1,54 @@
+.progress-section {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.stat-card {
+    background: var(--primary-light);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--gray-medium);
+}
+
+.progress-list {
+    margin-top: 24px;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #F1F3F4;
+}
+
+
+.progress-item .material-icons {
+    color: var(--secondary);
+    margin-right: 12px;
+}
+
+.progress-text {
+    font-size: 14px;
+    flex: 1;
+}

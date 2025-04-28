@@ -8,7 +8,7 @@ const TarjetaPresentacionCurso = ({imagenCurso, nombreCurso, descripcionCurso, n
             <div className="tarjeta__presentacion__curso">
                 <img src={imagenCurso} alt="portada del curso" />
                 <div className="datos__curso">
-                    <p>{nombreCurso}</p>
+                    <p>{nombreCurso}</p>    
                     <p>{descripcionCurso}</p>
                     <p>Creado por: {nombreAutor}</p>
                     <p>{cantidadTemas} Temas</p>

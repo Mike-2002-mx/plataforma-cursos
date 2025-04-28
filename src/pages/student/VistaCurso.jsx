@@ -5,8 +5,9 @@ import axios from "axios";
 import './vistaCurso.css';
 import DetallesTema from "../../components/DetallesTema";
 import { useNavigate } from "react-router-dom";
+import BarraLateralHome from "../../components/BarraLateralHome";
 
-    const VistaCurso = () => {
+const VistaCurso = () => {
 
         const [cursoActual, setCursoActual] = useState(null);
         const [temas, setTemas] = useState([]);
@@ -52,27 +53,33 @@ import { useNavigate } from "react-router-dom";
 
     return (
         <>
-            <Header/>
-            {cursoActual && (
-            <TarjetaPresentacionCurso
-                imagenCurso={cursoActual.imageUrl}
-                nombreCurso={cursoActual.title}
-                descripcionCurso={cursoActual.description}
-                nombreAutor={cursoActual.instructorName}
-                cantidadTemas={0}
-            />
-            )}
-            <h2>Temas del curso</h2>
-            {temas.map(tema => (
-                <DetallesTema
-                    key={tema.id}
-                    tituloTema={tema.title}
-                    totalLecciones={0}
-                    isComplete={true}
-                    onAction={() => revisarTema(tema)}
-                />
-            ))
-            }
+            
+            <div className="dashboard">
+                <BarraLateralHome/>
+
+                <div className="main-content">
+                    {cursoActual && (
+                    <TarjetaPresentacionCurso
+                        imagenCurso={cursoActual.imageUrl}
+                        nombreCurso={cursoActual.title}
+                        descripcionCurso={cursoActual.description}
+                        nombreAutor={cursoActual.instructorName}
+                        cantidadTemas={0}
+                    />
+                    )}
+                    <h2>Temas del curso</h2>
+                    {temas.map(tema => (
+                        <DetallesTema
+                            key={tema.id}
+                            tituloTema={tema.title}
+                            totalLecciones={0}
+                            isComplete={true}
+                            onAction={() => revisarTema(tema)}
+                        />
+                    ))
+                    }
+                </div>
+            </div>
         </>
     );
 };

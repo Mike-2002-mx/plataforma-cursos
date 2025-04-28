@@ -1,10 +1,9 @@
 import { use, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Header from "../../components/Header";
-import TarjetaCurso from "../../components/TarjetaCurso";
-import TarjetaAvance from "../../components/TarjetaAvance";
-import VistaCurso from "./VistaCurso";
+import SeccionProgreso from "../../components/SeccionProgreso";
+import BarraLateralHome from "../../components/BarraLateralHome";
+import TarjetaCursoHome from "../../components/TarjetaCursoHome";
 import axios from "axios";
 import './home.css';
 
@@ -15,6 +14,9 @@ const Home =  () =>{
     const token = localStorage.getItem('token');
     const idUsuario = localStorage.getItem('id');
     const navigate = useNavigate();
+
+    console.log(token);
+    console.log(idUsuario);
 
     useEffect(() =>{
         setUserName(localStorage.getItem('username'));
@@ -64,6 +66,9 @@ const Home =  () =>{
     const cursosInscritos = cursos.filter(curso => cursosInscritosId.includes(curso.id));
     const cursosDisponibles = cursos.filter(curso => !cursosInscritosId.includes(curso.id));
 
+    console.log('Cursos inscritos: ', cursosInscritos);
+    console.log('Cursos disponibles: ', cursosDisponibles)
+
     const persistirCurso = (curso) =>{
         localStorage.setItem('cursoActual', JSON.stringify(curso));
         navigate("/curso");
@@ -88,38 +93,53 @@ const Home =  () =>{
         }
     }
 
+    const recentActivities = [
+        { id: 1, title: 'Cómo organizar mi bandeja de entrada' },
+        { id: 2, title: 'Configuración de filtros avanzados' },
+        { id: 3, title: 'Uso de etiquetas y categorías' }
+    ];
+
     return (
         <>
-            <Header username={username}/>
-            <h2 className="bienvenida__mensaje">Bienvenida {username}</h2>
-            <h2>Mis cursos</h2>
-            <div className="contenedor__cursos__inscritos">
-                {cursosInscritos.map(curso => (
-                    <TarjetaCurso
-                        key={curso.id}
-                        isInscrito={true}
-                        portada={curso.imageUrl}
-                        nombreCurso={curso.title}
-                        onAction={() => persistirCurso(curso)}
-                    />
-                ))}
+            <div className="dashboard">
+                <BarraLateralHome inicialNombre={'I'} nombreUsuario={username} rol={'Estudiante'} />
+            
+                <div className="main-content">
+                    <div className="welcome-section">
+                        <h1>Bienvenida, {username}</h1>
+                        <p className="subtitle">Continúa tu aprendizaje donde lo dejaste</p>
+                    </div>
+                    
+                    <h2>Mis cursos en progreso</h2>
+                    <div className="courses-grid">
+                        {cursosInscritos?.map(curso =>(
+                            <TarjetaCursoHome
+                                key={curso.id}
+                                nombreCurso={curso.title}
+                                onAction={() => persistirCurso(curso)}
+                                isInscrito={true}
+                            />
+                        ))
+                        }
+                    </div>
+
+                    <SeccionProgreso temasCompletados={10} listaActividadesCompletadas={recentActivities} leccionesCompletadas={10}/>
+                    <h2>Cursos disponibles</h2>
+                    <div className="courses-grid">
+                        {cursosDisponibles?.map(curso => (
+                            <TarjetaCursoHome
+                                key={curso.id} 
+                                nombreCurso={curso.title}
+                                isInscrito={false}
+                                imagenPortada={curso.imageUrl}
+                                onAction={() => realizarInscripcion(idUsuario, curso.id, curso)}
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
-            <h2>Cursos disponibles</h2>
-            <div className="contenedor__cursos__disponibles">
-                {cursosDisponibles.map(curso => (
-                    <TarjetaCurso
-                        key={curso.id}
-                        isInscrito={false}
-                        portada={curso.imageUrl}
-                        nombreCurso={curso.title}
-                        onAction={() => realizarInscripcion(idUsuario, curso.id, curso)}
-                    />
-                ))}
-            </div>
-            <TarjetaAvance/>
         </>
     );
-
 };
 
 export default Home;

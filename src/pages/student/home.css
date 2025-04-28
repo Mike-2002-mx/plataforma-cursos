@@ -1,4 +1,51 @@
-h2{
+.dashboard {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.main-content {
+    padding: 32px;
+}
+
+.welcome-section {
+    margin-bottom: 32px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--gray-medium);
+    margin-bottom: 25px;
+}
+
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* h2{
     font-size: 1.2rem;
     margin-left: 15px;
 }
@@ -19,4 +66,4 @@ h2{
 
 @media (max-width: 480px){
     
-}
+} */
