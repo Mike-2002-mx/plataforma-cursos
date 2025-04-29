@@ -8,27 +8,30 @@ export const AuthProvider = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        
         const token = localStorage.getItem('token');
-        if(token){
-            
-            setIsAuthenticated(true);
+        const usuarioGuardado = localStorage.getItem('userData');
+        if (token && usuarioGuardado) {
+            try {
+                const userData = JSON.parse(usuarioGuardado);
+                setUser(userData);
+                setIsAuthenticated(true);
+            } catch (error) {
+                console.error('Error parsing userData:', error);
+                logout();
+            }
         }
     }, []);
 
-    const login = () => {
+    const login = (token, userData) => {
         localStorage.setItem('token', token);
+        localStorage.setItem('userData', JSON.stringify(userData));
         setIsAuthenticated(true);
-        // setUser({
-        //     name: userData.data.username,
-        //     email: userData.data.email,
-        //     roles: userData.data.roles
-        // });
-        setUser(null);
+        setUser(userData);
     };
 
-    const logout = () => {
+    const logout = async() => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userData');
         setIsAuthenticated(false);
         setUser(null);
     };

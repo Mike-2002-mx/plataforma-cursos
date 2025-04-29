@@ -1,38 +1,56 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import './login.css';
 
 const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');   
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+        setLoading(true);
+
         try {
             const response = await axios.post('http://localhost:8080/api/auth/signin', {email, password});
-            const token = response.data.token;
-            const roles = response.data.roles;
-            const id = response.data.id;
-            const username = response.data.username;
+            
+            const userData = response.data;
+            console.log("Respuesta del servidor: ", userData);
 
-            localStorage.setItem('token', token);
-            localStorage.setItem('username', username);
-            localStorage.setItem('id', id);
+            if(userData && userData.token){
+                login(userData.token, userData);
+                console.log("Usuario autenticado: ", userData);
+                console.log("Roles: ", userData.roles);
 
-            setTimeout(() => {
-                if(roles[0] === 'ROLE_INSTRUCTOR'){
-                    navigate('/dashboard');
-                } else{
+                if(userData.roles && userData.roles.includes('ROLE_STUDENT')){
                     navigate('/home');
+                }else{
+                    navigate('/dashboard');
                 }
-            }, 500);
+            }
 
         } catch (error) {
-            setError( 'Credenciales inválidas')
+            console.error('Error durante el inicio de sesión:', error);
+            
+            if (error.response) {
+                // Error de respuesta del servidor
+                setError(`Error de servidor: ${error.response.data.message || error.response.statusText}`);
+            } else if (error.request) {
+                // Error de red
+                setError('No se pudo conectar con el servidor. Verifica tu conexión.');
+            } else {
+                // Error de configuración
+                setError(`Error: ${error.message}`);
+            }
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -69,9 +87,9 @@ const Login = () =>{
                 <button 
                     type="submit" 
                     className="boton__iniciar__sesion"
-                    //disabled={loading}
+                    disabled={loading}
                 >
-                    Iniciar sesion
+                    {loading ? 'Iniciando...' : 'Iniciar sesión'}
                 </button>
                 </form>
                 

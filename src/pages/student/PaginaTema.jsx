@@ -10,25 +10,25 @@ import { useNavigate } from "react-router-dom";
 
 const PaginaTema = () => {
 
-    const [lecciones, setLecciones] = useState([]);
-    const tema = localStorage.getItem('temaActual');
+    const [progresoLecciones, setProgresoLecciones] = useState([]);
+    const temaActual = JSON.parse(localStorage.getItem('temaActual'));
+    const idTemaActual = temaActual.idTopic;
     const token = localStorage.getItem('token');
-    const temaParseado = JSON.parse(tema);
-    const temaTitle = temaParseado.title;
-    const temaDescription = temaParseado.description;
-    const idTema = temaParseado.id;
+    const cursosInscritos = JSON.parse(localStorage.getItem('cursosInscritos'));
+    const idUsuario = localStorage.getItem('id');
     const navigate = useNavigate();
 
     useEffect(() => {
         const obtenerLecciones = async () =>{
-            if(token && idTema){
+            if(token){
                 try {
-                    const response = await axios.get(`http://localhost:8080/lessons/byTopic/${idTema}`, {
+                    const response = await axios.get(`http://localhost:8080/progressLesson/byUser/${idUsuario}`, {
                         headers:{
                             Authorization: `Bearer ${token}`
                         }
                     });
-                    setLecciones(response.data);
+                    setProgresoLecciones(response.data);
+
                 } catch (error) {
                     console.error('Error al obtener temas', error)
                 }
@@ -36,6 +36,8 @@ const PaginaTema = () => {
         }
         obtenerLecciones();
     }, []);
+
+    const leccionesTema = progresoLecciones.filter(progresoLeccion => progresoLeccion.idTopic === idTemaActual);
 
     const verLeccion = (leccion) =>{
         localStorage.setItem('leccionActual', JSON.stringify(leccion));
@@ -45,11 +47,11 @@ const PaginaTema = () => {
     return(
         <>
             <div className="dashboard">
-                <BarraLateralHome/>
+                <BarraLateralHome cursosInscritos={cursosInscritos}/>
                 <div className="main-content">
                     <div className="lesson-header">
-                        <h1>Tema: {temaTitle}</h1>
-                        <h2><h2>{temaDescription}</h2></h2>
+                        <h1>Tema: {temaActual.titleTopic}</h1>
+                        <h2>{temaActual.descriptionTopic}</h2>
                         <div className="progress-container">
                             <div className="progress-bar"></div>
                         </div>
@@ -57,10 +59,10 @@ const PaginaTema = () => {
                     </div>
                     <div className="lesson-content">
                         <h2>Contenido de la lección</h2>
-                        {lecciones.map(leccion => (
+                        {leccionesTema.map(leccion => (
                             <DetallesLeccion 
                                 key={leccion.id}
-                                nombreLeccion={leccion.title}
+                                nombreLeccion={leccion.titleLesson}
                                 isComplete={false}
                                 isVideo={true}
                                 onAction={() => verLeccion(leccion)}

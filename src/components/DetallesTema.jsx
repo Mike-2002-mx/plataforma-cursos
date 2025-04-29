@@ -11,7 +11,7 @@ const DetallesTema = ({tituloTema, totalLecciones, isComplete, onAction}) =>{
                 {isComplete ? (
                     <button className="btn__detalles" onClick={onAction}>Revisar</button>
                 ):(
-                    <button className="btn__detalles">Comenzar</button>
+                    <button className="btn__detalles" onClick={onAction}>Comenzar</button>
                 )
                 }
                 {isComplete ? (

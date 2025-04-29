@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
+import { useAuth } from '../../context/AuthContext';
 
 const RegisterForm = () => {
+    const {login, logout} = useAuth();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -64,14 +67,25 @@ const RegisterForm = () => {
         e.preventDefault();
 
         try {
-        const response = await axios.post('http://localhost:8080/api/auth/signup', formData);
-        console.log(response);
-        setMessage('Registro exitoso');
-        setTimeout(()=> {
-            navigate('/login');
-        }, 1000);
+            
+            const response = await axios.post('http://localhost:8080/api/auth/signup', formData);
 
-        console.log('Respuesta del servidor:', response.data);
+            const loginResponse = await axios.post('http://localhost:8080/api/auth/signin', {
+                email: formData.email,
+                password: formData.password,
+            });
+
+            console.log('Respuesta de login:', loginResponse.data);
+
+            login(loginResponse.data.token, loginResponse.data);
+            
+            if (loginResponse.data.roles.includes('ROLE_STUDENT')) {
+                navigate('/home');
+            } else if (loginResponse.data.roles.includes('ROLE_INSTRUCTOR')) {
+                navigate('/dashboard');
+            } else {
+                navigate('/home');
+            }
         } catch (error) {
         console.error('Error al registrar:', error);
         setMessage('Error en el registro');

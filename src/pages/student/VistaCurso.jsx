@@ -10,9 +10,12 @@ import BarraLateralHome from "../../components/BarraLateralHome";
 const VistaCurso = () => {
 
         const [cursoActual, setCursoActual] = useState(null);
-        const [temas, setTemas] = useState([]);
+        const [progresoTemas, setProgresoTemas] = useState([]);
         const [idCurso, setIdCurso] = useState(null);
+        const idUsuario = localStorage.getItem('id');
         const token = localStorage.getItem('token');
+        const cursosInscritos = JSON.parse(localStorage.getItem('cursosInscritos'));
+        console.log(cursosInscritos);
         const navigate = useNavigate();
 
         useEffect(() => {
@@ -29,22 +32,25 @@ const VistaCurso = () => {
         }, []);
 
         useEffect(() => {
-            const obtenerTemas = async () =>{
+            const obtenerProgresoTemas = async () =>{
                 if(token && idCurso){
                     try {
-                        const response = await axios.get(`http://localhost:8080/topics/course/${idCurso}`, {
+                        const response = await axios.get(`http://localhost:8080/progressTopic/byUser/${idUsuario}`, {
                             headers:{
                                 Authorization: `Bearer ${token}`
                             }
                         });
-                        setTemas(response.data);
+                        setProgresoTemas(response.data);
                     } catch (error) {
                         console.error('Error al obtener temas', error)
                     }
                 }
             }
-            obtenerTemas();
+            obtenerProgresoTemas();
         }, [idCurso, token]);
+
+        //Filtrar para mostrar solo temas del curso
+        const temasCurso = progresoTemas.filter(progresoTema => progresoTema.idCourse === idCurso);
 
         const revisarTema = (tema) =>{
             localStorage.setItem('temaActual', JSON.stringify(tema));
@@ -55,7 +61,7 @@ const VistaCurso = () => {
         <>
             
             <div className="dashboard">
-                <BarraLateralHome/>
+                <BarraLateralHome cursosInscritos={cursosInscritos}/>
 
                 <div className="main-content">
                     {cursoActual && (
@@ -68,12 +74,12 @@ const VistaCurso = () => {
                     />
                     )}
                     <h2>Temas del curso</h2>
-                    {temas.map(tema => (
+                    {temasCurso.map(tema => (
                         <DetallesTema
-                            key={tema.id}
-                            tituloTema={tema.title}
-                            totalLecciones={0}
-                            isComplete={true}
+                            key={tema.idTopic}
+                            tituloTema={tema.titleTopic}
+                            totalLecciones={tema.totalLessons}
+                            isComplete={tema.completed }
                             onAction={() => revisarTema(tema)}
                         />
                     ))
