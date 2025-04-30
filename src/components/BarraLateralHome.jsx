@@ -1,37 +1,48 @@
 import { useEffect, useState } from 'react';
-import './barraLateralHome.css';
 import { useNavigate } from 'react-router-dom';
-const BarraLateralHome = ({cursosInscritos}) =>{
+import { useAuth } from '../context/AuthContext';
+import './barraLateralHome.css';
+import { useCourses } from '../context/CoursesContext';
 
-    const [nombreUsuario, setNombreUsuario] = useState('');
-    const [avatar, setAvatar] = useState('');
+
+const BarraLateralHome = ({}) =>{
+
     const navigate = useNavigate();
+    const {isAuthenticated, user, logout} = useAuth();
+    const {
+        enrolledCourses,
+        loading,
+        error,
+        selectCourse
+    } = useCourses();
+    const [avatar, setAvatar] = useState('');
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        console.log("Cerrando sesión...");
-        navigate('/login')
-    }
+    //Verificar autenticación
+    useEffect(() => {
+        if(!isAuthenticated){
+            console.log("Usuario no autenticado, redirigiendo a login");
+            navigate('/login');
+        }
+    },[isAuthenticated, navigate])
 
-    const volverInicio = () =>{
+
+    //Manejar la selección del curso inscrito
+    const handleSelectCourse = (curso) => {
+        selectCourse(curso);
+        navigate('/curso');
+    };
+
+    const naviteHome = () =>{
         navigate('/home');
     }
 
-    const cambiarCurso = (curso) =>{
-        localStorage.setItem('cursoActual', JSON.stringify(curso));
-        console.log("Cambiando curso");
-        navigate("/curso"); 
-    }
-
-    useEffect(() => {
-        const name = localStorage.getItem('username');
-        const primeraLetra = name.charAt(0);
-        setNombreUsuario(name);
-        setAvatar(primeraLetra);
+    //Mostrar avatar y rol
+    useEffect(() =>{
+        const name = user?.username
+        const a = name.charAt(0);
+        setAvatar(a);
     }, [])
-
-
-
+    
 
     return (
         <>
@@ -44,27 +55,14 @@ const BarraLateralHome = ({cursosInscritos}) =>{
                 <div className="user-card">
                     <div className="avatar">{avatar}</div>
                     <div className="user-info">
-                        <h4>{nombreUsuario}</h4>
+                        <h4>{user?.username}</h4>
                         <span className="badge">Estudiante</span>
                     </div>
                 </div>
                 
                 <div className="menu-section">
-                    <h3 className="section-title">Mis cursos</h3>
-                    {cursosInscritos && cursosInscritos.map(curso => (
-                        <button 
-                        className="btn"
-                        onClick={() => cambiarCurso(curso)}
-                        key={curso.id}>
-                        <span className="material-icons icon">book</span>
-                            {curso.title}
-                        </button>
-                    ))}
-                </div>
-                
-                <div className="menu-section">
                     <h3 className="section-title">Opciones</h3>
-                    <button onClick={volverInicio} className="btn">
+                    <button onClick={naviteHome} className="btn">
                         <span className="material-icons icon">home</span>
                         Inicio
                     </button>
@@ -72,10 +70,18 @@ const BarraLateralHome = ({cursosInscritos}) =>{
                         <span className="material-icons icon">settings</span>
                         Ajustes
                     </button>
-                    <button onClick={logout} className="btn btn-danger">
-                        <span className="material-icons icon">logout</span>
-                        Cerrar sesión
-                    </button>
+                </div>
+                <div className="menu-section">
+                    <h3 className="section-title">Mis cursos</h3>
+                    {enrolledCourses && enrolledCourses.map(curso => (
+                        <button 
+                        className="btn"
+                        onClick={() => handleSelectCourse(curso)}
+                        key={curso.id}>
+                        <span className="material-icons icon">book</span>
+                            {curso.title}
+                        </button>
+                    ))}
                 </div>
             </div>
         </>

@@ -1,0 +1,44 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+.main-content {
+    padding: 32px;
+}
+
+.welcome-section {
+    margin-bottom: 32px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+}
+
+.contenedor-cursos {
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
+    gap: 24px;
+    margin-bottom: 32px; */
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+}
+
+.btn-crearCurso {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}

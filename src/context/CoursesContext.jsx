@@ -39,7 +39,7 @@ export const CoursesProvider = ({children}) =>{
         }
     };
 
-    //Obtener IDs de cursos inscritos
+    //Obtener IDs de cursos inscritos del estudiante
     const fetchEnrolledCoursesIds = async () => {
         if (!isAuthenticated || !user?.id || !user?.token) return [];
 
@@ -142,21 +142,21 @@ export const CoursesProvider = ({children}) =>{
     const refreshCourses = () => {
         const loadCoursesData = async () => {
         setLoading(true);
-        try {
-            const courses = await fetchAllCourses();
-            const enrolledIds = await fetchEnrolledCoursesIds();
-            
-            const enrolled = courses.filter(course => enrolledIds.includes(course.id));
-            const available = courses.filter(course => !enrolledIds.includes(course.id));
-            
-            setEnrolledCourses(enrolled);
-            setAvailableCourses(available);
-            localStorage.setItem('cursosInscritos', JSON.stringify(enrolled));
-        } catch (err) {
-            setError('Error al refrescar los datos de cursos');
-        } finally {
-            setLoading(false);
-        }
+            try {
+                const courses = await fetchAllCourses();
+                const enrolledIds = await fetchEnrolledCoursesIds();
+                
+                const enrolled = courses.filter(course => enrolledIds.includes(course.id));
+                const available = courses.filter(course => !enrolledIds.includes(course.id));
+                
+                setEnrolledCourses(enrolled);
+                setAvailableCourses(available);
+                localStorage.setItem('cursosInscritos', JSON.stringify(enrolled));
+            } catch (err) {
+                setError('Error al refrescar los datos de cursos');
+            } finally {
+                setLoading(false);
+            }
     };
 
     loadCoursesData();

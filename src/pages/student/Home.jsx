@@ -9,107 +9,6 @@ import axios from "axios";
 import './home.css';
 
 const Home =  () =>{
-    // const [cursos, setCursos] = useState([]);
-    // const [cursosInscritosId, setCursosInscritosId] = useState([]);
-    // const [username, setUserName] = useState('');
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState('');
-
-    // const navigate = useNavigate();
-    // const {user, isAuthenticated} = useAuth();
-
-    // useEffect(() =>{
-    //     if(!isAuthenticated){
-    //         console.log("Usuario no autenticado, redirigiendo a login")
-    //         navigate('/login');
-    //     }
-    // },[isAuthenticated, navigate]);
-
-    // useEffect(() =>{
-    //     const obtenerCursos = async () =>{ 
-    //         if (!user || !user.token) {
-    //             console.log("No hay token disponible");
-    //             return;
-    //         }
-    //         setLoading(true);
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/courses/allCourses', {
-    //                 headers: {
-    //                     Authorization: `Bearer ${user.token}`,
-    //                 },
-    //             });
-    //             setCursos(response.data);
-    //         } catch (error) {
-    //             console.error('Error al obtener cursos:', error.response?.data || error.message);
-    //             setError('Error al cargar los cursos. Intenta de nuevo más tarde.');
-    //         }finally{
-    //             setLoading(false);
-    //         }
-    //     };
-    //     if (isAuthenticated) {
-    //         obtenerCursos();
-    //     }
-    // }, [isAuthenticated, user]);
-
-    // useEffect(() =>{
-    //     const obtenerIdInscritos = async () =>{
-    //         if (!user || !user.id || !user.token) {
-    //             console.log("Faltan datos del usuario para obtener inscripciones");
-    //             return;
-    //         }
-
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/enrollments/student/user', {
-    //                 params: { userId: user.id },
-    //                 headers: {
-    //                     Authorization: `Bearer ${user.token}`
-    //                 }
-    //             });
-    //             const cursosId = response.data.map(e => e.idCourse);
-    //             setCursosInscritosId(cursosId);
-    //         } catch (error) {
-    //             console.error("Error al obtener inscripciones", error);
-    //         }
-    //     };
-    //     if (isAuthenticated) {
-    //         obtenerIdInscritos();
-    //     }
-    // }, [isAuthenticated, user]);
-    
-    // const cursosInscritos = cursos.filter(curso => cursosInscritosId.includes(curso.id));
-    // const cursosDisponibles = cursos.filter(curso => !cursosInscritosId.includes(curso.id));
-
-    // //Persistir cursos inscritos
-    // useEffect(() => {
-    //     localStorage.setItem('cursosInscritos', JSON.stringify(cursosInscritos));
-    //     console.log("USe efect para persistir cursosInscritos");
-    // }, [cursosInscritos]);
-
-
-
-    // const persistirCurso = (curso) =>{
-    //     localStorage.setItem('cursoActual', JSON.stringify(curso));
-    //     navigate("/curso");
-    // }
-
-    // const realizarInscripcion = async (idCurso, curso) =>{
-    //     try {
-    //         const response = await axios.post(
-    //             'http://localhost:8080/enrollments',
-    //             { idUser: user.id, idCourse: idCurso },
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${user.token}`
-    //                 }
-    //             }
-    //         );
-    //         localStorage.setItem('cursoActual', JSON.stringify(curso));
-    //         console.log(response.data)
-    //         navigate("/curso");
-    //     } catch (error) {
-    //         console.log('Error al obtener inscripciones: ', error);
-    //     }
-    // }
 
     const navigate = useNavigate();
     const { isAuthenticated, user } = useAuth();
@@ -133,6 +32,7 @@ const Home =  () =>{
     // Manejar selección de curso inscrito
     const handleSelectCourse = (curso) => {
         selectCourse(curso);
+        console.log(localStorage.getItem('cursoActual'));
         navigate("/curso");
     };
 
@@ -185,9 +85,9 @@ const Home =  () =>{
                     </div>
 
                     <SeccionProgreso 
-                        temasCompletados={10} 
+                        temasCompletados={0} 
                         listaActividadesCompletadas={recentActivities} 
-                        leccionesCompletadas={10}
+                        leccionesCompletadas={0}
                     />
                     
                     <h2>Cursos disponibles</h2>

@@ -75,6 +75,10 @@ const RegisterForm = () => {
                 password: formData.password,
             });
 
+            console.log('Datos enviados en registro:', formData);
+            console.log('Respuesta de registro:', response.data);
+            console.log('Respuesta de login:', loginResponse.data);
+
             console.log('Respuesta de login:', loginResponse.data);
 
             login(loginResponse.data.token, loginResponse.data);
@@ -135,8 +139,8 @@ const RegisterForm = () => {
                     required
                 >
                     <option value="">Selecciona un rol</option>
-                    <option value="ROLE_INSTRUCTOR">Instructor</option>
-                    <option value="ROLE_STUDENT">Estudiante</option>
+                    <option value="INSTRUCTOR">Instructor</option>
+                    <option value="STUDENT">Estudiante</option>
                 </select>
 
                 <button

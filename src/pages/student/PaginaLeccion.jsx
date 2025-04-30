@@ -1,5 +1,4 @@
 import ReactPlayer from "react-player";
-import Header from "../../components/Header";
 import ReproductorVideo from "../../components/ReproductorVideo";
 import { useRef, useState } from 'react';
 import PdfViewer from "../../components/VisualizadorPDF";

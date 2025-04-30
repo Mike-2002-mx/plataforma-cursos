@@ -1,0 +1,46 @@
+.card-2 {
+    display: flex;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 500px;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card-2:hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .thumb {
+    width: 200px;
+    object-fit: cover;
+  }
+  .info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .info h4 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--gray-dark);
+  }
+  .info p {
+    color: var(--gray-medium);
+    margin: 0.5rem 0;
+  }
+  .btn-review {
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  .btn-review:hover {
+    background: #1669d0;
+  }
+  
