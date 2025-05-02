@@ -102,7 +102,7 @@ export const CoursesProvider = ({children}) =>{
         if (!isAuthenticated || !user?.id || !user?.token) {
         setError('Debe iniciar sesión para inscribirse');
         return { success: false, message: 'No autenticado' };
-        }
+    }
 
         try {
         const response = await axios.post(

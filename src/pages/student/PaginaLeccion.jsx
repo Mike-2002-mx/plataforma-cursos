@@ -1,24 +1,67 @@
-import ReactPlayer from "react-player";
-import ReproductorVideo from "../../components/ReproductorVideo";
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PdfViewer from "../../components/VisualizadorPDF";
 import BarraLateralHome from "../../components/BarraLateralHome";
 import VideoJS from "../../components/VideoJS";
 import videojs from "video.js";
+import { useCourseContent } from '../../context/CourseContentContext';
+import { useCourses } from '../../context/CoursesContext';
+import './paginaLeccion.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const PaginaLeccion = () =>{
+
+    const [progressLogged, setProgressLogged] = useState(false);
+    const navigate = useNavigate();
+    const { isAuthenticated, user } = useAuth();
+    const {
+        currentLesson,
+        currentTopic,
+        completeLesson,
+        loading, 
+    } = useCourseContent();
+
+    // Verificar autenticación
+    useEffect(() => {
+        if (!isAuthenticated) {
+            console.log("Usuario no autenticado, redirigiendo a login");
+            navigate('/login');
+        }
+    }, [isAuthenticated, navigate]);
+
+    //Verficiar existencia de lección
+    useEffect(() => {
+        if(!currentLesson && !loading){
+            console.log("No hay lección seleccionada, redirigiendo a curso");
+            navigate('/tema');
+        }
+    },[currentLesson, loading, navigate]);
+
+    console.log("Detalles de la lección actual", currentLesson);
 
     const playerRef = useRef(null);
 
     const videoJsOptions = {
-        autoplay: true,
+        autoplay: false,
         controls: true,
         responsive: true,
         fluid: true,
-        sources: [{
-            src: '/public/videos/Brooklyn Nine-Nine _ Every Cold Open (Season 1 Part 1)(720P_HD).mp4',
-            type: 'video/mp4'
-        }]
+        sources: [
+            {
+                src: '/public/videos/Cómo CREAR un CORREO electrónico de GMAIL 2025.mp4', 
+                type: 'video/mp4'
+            },
+        ],
+        tracks: [
+            {
+                kind: 'subtitles',
+                src: '/public/subtitulos/Cómo CREAR un CORREO electrónico de GMAIL 2025.vtt',
+                srclang: 'nah', 
+                label: 'Náhuatl',
+                default: true,
+                mode: 'showing',
+            }
+        ],
     };
 
     const handlePlayerReady = (player) => {
@@ -31,28 +74,63 @@ const PaginaLeccion = () =>{
         player.on('dispose', () => {
             videojs.log('Player will dispose');
         });
+
+        // player.on('timeupdate', () => {
+        //     try {
+        //         if(!player.paused()){
+        //             const currentTime = player.currentTime();
+        //             const duration = player.duration();
+
+        //             if(duration > 0){
+        //                 const porcentaje = (currentTime/ duration)*100;
+
+        //                 if(porcentaje >5 && !currentLesson.completed && !progressLogged){
+        //                     progressLogged = true;
+        //                     Promise.resolve().then(() => {
+        //                         completeLesson(user.id, currentLesson.idLesson).catch(err => console.error("Error al completar lección", err));
+        //                     });
+        //                 }
+        //             }
+        //         }
+
+        //     } catch (error) {
+        //         console.error('Error en timeupdate: ', error);
+        //     }
+        // });
+
+        player.on('ended', () => {
+            console.log("Video visto completamente");
+            if(!currentLesson.completed){
+                Promise.resolve().then(() => {
+                    completeLesson(user.id, currentLesson.idLesson).catch(err => console.error("Error al completar la lección", err));
+                })
+            }
+        });
     }
-
-
 
     return(
         <>
             <div className="dashboard">
                 <BarraLateralHome/>
                 <div className="main-content">
-                    <h2>Video de tal y cual cosa</h2>
-                    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                        <h1>Reproductor Video.js en React</h1>
-                        <VideoJS 
-                            options={videoJsOptions}
-                            onReady={(player) => {
-                            console.log('Player está listo', player);
-                            }}
-                        />
+                    <div className="lesson-header">
+                        <h1>Tema: {currentTopic.titleTopic} </h1>
+                    </div>
+                    <div className="lesson-content">
+                    <h2>Titulo lección: {currentLesson.titleLesson}</h2>
+                        {/* <div className="video-container">
+                            
+                        </div> */}
+                        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                            <VideoJS 
+                                options={videoJsOptions}
+                                onReady={handlePlayerReady}
+                            />
                         </div>
-                    <h2>Descripcion de tal y cual cosa</h2>
-                    <h2>Vamos a ver si carga el PDF</h2>
-                    <embed src="https://downloads.telmex.com/pdf/Info-Redes%20Sociales.pdf" width="90%" height="600px" type="application/pdf" />
+                        <div className="lesson-description">
+                            Description: {currentLesson.descriptionLesson}
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
@@ -61,11 +139,14 @@ const PaginaLeccion = () =>{
 
 export default PaginaLeccion;
 
-    // const leccionActual = localStorage.getItem('leccionActual');
-    // const leccionParseada = JSON.parse(leccionActual);
-    // const tituloLeccion = leccionParseada.title
-    // const contentUrl = leccionParseada.contentUrl;
-    ///>
-
-    //<PdfViewer pdfUrl={'/public/De-la-brevedad-de-la-vida.pdf'} />
-    //
+//                    <embed src="https://downloads.telmex.com/pdf/Info-Redes%20Sociales.pdf" width="90%" height="600px" type="application/pdf" />
+/**
+ * <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                                <VideoJS 
+                                    options={videoJsOptions}
+                                    onReady={(player) => {
+                                    console.log('Player está listo', player);
+                                    }}
+                                />
+                            </div>
+ */

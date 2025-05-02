@@ -10,7 +10,6 @@ const VideoJS = (props) => {
 
     useEffect(() => {
         
-        //
         if(!playerRef.current){
             const videoElement = document.createElement("video-js");
 
@@ -19,11 +18,11 @@ const VideoJS = (props) => {
 
             const player = playerRef.current = videojs(videoElement, options, () => {
                 videojs.log('Player is ready');
+                console.log('Player tracks:', player.textTracks());
                 onReady && onReady(player);
             });
         }else {
             const player = playerRef.current;
-
             player.autoplay(options.autoplay);
             player.src(options.sources);
         }

@@ -14,9 +14,8 @@ export const InstructorCoursesProvider = ({children}) => {
 
     //Obtener cursos del Instructor
     const fetchIstructorCourses = async () => {
-
         if(!isAuthenticated || !user?.token) return;
-        
+
         setLoading(true);
         try {
             const response = await axios.get(`http://localhost:8080/courses/byInstructor/${user.id}`, {
@@ -45,10 +44,8 @@ export const InstructorCoursesProvider = ({children}) => {
             try {
                 const courses = await fetchIstructorCourses();
                 setInstructorCourses(courses);
-
                 //Guardar datos de los cusos en localStorage
                 localStorage.setItem('cursosInstructor', JSON.stringify(courses));
-
             } catch (error) {
                 setError("Error al cargar los datos de cursos")
             }finally{
@@ -56,8 +53,9 @@ export const InstructorCoursesProvider = ({children}) => {
             }
         };
         loadCoursesData();
-
     },[isAuthenticated, user]);
+
+
 
 
     return(

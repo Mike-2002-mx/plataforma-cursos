@@ -80,6 +80,7 @@ const VistaCurso = () => {
                     ) : (
                         <p>Este curso aún no tiene temas disponibles.</p>
                     )}
+                    
                 </div>
             </div>
         </>

@@ -11,55 +11,22 @@ import { useNavigate } from "react-router-dom";
 
 
 const PaginaTema = () => {
-
-    // const [progresoLecciones, setProgresoLecciones] = useState([]);
-    // const temaActual = JSON.parse(localStorage.getItem('temaActual'));
-    // const idTemaActual = temaActual.idTopic;
-    // const token = localStorage.getItem('token');
-    // const cursosInscritos = JSON.parse(localStorage.getItem('cursosInscritos'));
-    // const idUsuario = localStorage.getItem('id');
-    // const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     const obtenerLecciones = async () =>{
-    //         if(token){
-    //             try {
-    //                 const response = await axios.get(`http://localhost:8080/progressLesson/byUser/${idUsuario}`, {
-    //                     headers:{
-    //                         Authorization: `Bearer ${token}`
-    //                     }
-    //                 });
-    //                 setProgresoLecciones(response.data);
-
-    //             } catch (error) {
-    //                 console.error('Error al obtener temas', error)
-    //             }
-    //         }
-    //     }
-    //     obtenerLecciones();
-    // }, []);
-
-    // const leccionesTema = progresoLecciones.filter(progresoLeccion => progresoLeccion.idTopic === idTemaActual);
-
-    // const verLeccion = (leccion) =>{
-    //     localStorage.setItem('leccionActual', JSON.stringify(leccion));
-    //     navigate("/leccion");
-    // };
     
     const navigate = useNavigate();
-    const {isAuthenticated } = useAuth();
+    const [allCompleted, setAllCompleted] = useState(true);
+    const {isAuthenticated, user } = useAuth();
     const {enrolledCourses} = useCourses();
     const {
         currentTopic,
         currentTopicLessons,
         selectLesson,
         loading,
+        completeTopic,
         error
     } = useCourseContent();
 
-    //Verificar autenticación   
+    //Verificar curso existente   
     useEffect(() => {
-        
         if(!currentTopic && !loading){
             console.log("No hay tema seleccionado, redirigiendo a curso");
             navigate('/curso');
@@ -71,6 +38,22 @@ const PaginaTema = () => {
         selectLesson(leccion);
         navigate('/leccion');
     }
+
+    useEffect(() => {
+        let verificar=true;
+        currentTopicLessons.map(topicLesson => {
+            console.log("Id lección: ", topicLesson.idLesson, ": ", topicLesson.completed);
+            if(!topicLesson.completed){
+                verificar=false;
+            }
+        })
+        console.log(verificar);
+        if(verificar && !currentTopic.completed){
+            Promise.resolve().then(() => {
+                completeTopic(user.id, currentTopic.idTopic).catch(err => console.error("Error al completar el tema", err));
+            });
+        }
+    }, []);
 
     if(loading){
         return <div className="loading">Cargando lecciones...</div>;

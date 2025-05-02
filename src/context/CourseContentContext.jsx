@@ -14,6 +14,10 @@ export const CourseContentProvider = ({children}) => {
     const [lessonsProgress, setLessonsProgress] = useState([]);
     const [currentCourseTopics, setCurrentCourseTopics] = useState([]);
     const [currentTopicLessons, setCurrentTopicLessons] = useState([]);
+    const [totalLessonsComplete, setTotalLessonsComplete] = useState(0);
+    const [lessonsComplete, setLessonsComplete] = useState([]);
+    const [totalTopicsComplete, setTotalTopicsComplete] = useState(0);
+    const [topicsComplete, setTopicsComplete] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -61,6 +65,59 @@ export const CourseContentProvider = ({children}) => {
     }, [currentCourse, user]);
 
 
+    useEffect(() => {
+        const fetchLessonsCompleted = async () => {
+            if(!user?.id || !user?.token) return;
+
+            try {
+                const response = await axios.get(`http://localhost:8080/progressLesson/lessonsCompletedByUser/${user.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                });
+                console.log(response.data);
+                const leccionesCompletadas = response.data;
+                const total = Array.isArray(response.data) ? response.data.length : 0;
+                setLessonsComplete(leccionesCompletadas);
+                setTotalLessonsComplete(total);
+            } catch (error) {
+                console.error("Error al obtener temas: ", error);
+                setError("Error al cargar los temas del curso");
+            }finally{
+                setLoading(false);
+            }
+        }
+
+        fetchLessonsCompleted();
+    },[user])
+
+    // //
+    // useEffect(() => {
+    //     const fetchTopicsCompleted = async () => {
+    //         if(!user?.id || !user?.token) return;
+
+    //         try {
+    //             const response = await axios.get(`http://localhost:8080/progressTopic/byUser/${user.id}`, {
+    //                 headers: {
+    //                     Authorization: `Bearer ${user.token}`
+    //                 }
+    //             });
+    //             console.log(response.data);
+    //             const temasCompletados = response.data;
+    //             const total = Array.isArray(response.data) ? response.data.length : 0;
+    //             setLessonsComplete(temasCompletados);
+    //             setTotalTopicsComplete(total);
+    //         } catch (error) {
+    //             console.error("Error al obtener temas: ", error);
+    //             setError("Error al cargar los temas del curso");
+    //         }finally{
+    //             setLoading(false);
+    //         }
+    //     }
+
+    //     fetchTopicsCompleted();
+    // },[user])
+
     //Cargar lecciones cuando se selecciona un tema
     useEffect(() => {
         const fetchLessonsProgress = async () => {
@@ -83,7 +140,7 @@ export const CourseContentProvider = ({children}) => {
                 const topicLessons = allLessons.filter(lesson => lesson.idTopic === currentTopic.idTopic);
                 setCurrentTopicLessons(topicLessons);
 
-                //Restaurar lección actual desde localStorage si exite
+                //Restaurar lección actual desde localStorage si existe
                 const saveLesson = localStorage.getItem('leccionActual');
                 if(saveLesson){
                     try {
@@ -114,15 +171,103 @@ export const CourseContentProvider = ({children}) => {
         localStorage.removeItem('leccionActual');
     };
 
-    //Función para seleccionar un tema
+    //Función para seleccionar una lección
     const selectLesson = (lesson) => {
         setCurrentLesson(lesson);
         localStorage.setItem('leccionActual', JSON.stringify(lesson));
     }
 
     //Marcar una lección como completada
+    const completeLesson = async (userId, lessonId) => {
+        if(!user?.id||!user?.token){
+            setError('Debe iniciar sessón para guardar progreso');
+            return{success: false}
+        }
+        try {
+            const response  = await axios.post(`http://localhost:8080/progressLesson/completedLesson/${userId}/${lessonId}`,
+                {}, // cuerpo vacío si no necesitas enviar datos
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                }
+            );
+            console.log(response.data);
+            // Actualizar estado local
+            setLessonsProgress(prev => 
+                prev.map(lesson => 
+                lesson.id === lessonId ? { ...lesson, completed: true } : lesson
+                )
+            );
+             // Actualizar lecciones del tema actual
+            setCurrentTopicLessons(prev => 
+                prev.map(lesson => 
+                lesson.idLesson === lessonId ? { ...lesson, completed: true } : lesson
+                )
+            );
 
+             // Si la lección actual es la que se completó, actualizarla
+            if (currentLesson?.idLesson === lessonId) {
+                const updatedLesson = { ...currentLesson, completed: true };
+                setCurrentLesson(updatedLesson);
+                localStorage.setItem('leccionActual', JSON.stringify(updatedLesson));
+            }
 
+            return {succes: true, data: response.data}
+        } catch (error) {
+            console.error("Error al marcar lección como completada: ", error);
+            setError('Error al actualizar progreso');
+            return {succes: false};
+        }
+    };
+
+    const completeTopic = async(userId, topicId) => {
+        if(!user?.id||!user?.token){
+            setError('Debe iniciar sessón para guardar progreso');
+            return{success: false}
+        }
+        try {
+            const response  = await axios.post(`http://localhost:8080/progressTopic/completedTopic/${userId}/${topicId}`,
+                {}, // cuerpo vacío si no necesitas enviar datos
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                }
+            );
+            console.log(response.data);
+            // Actualizar estado local
+            // setLessonsProgress(prev => 
+            //     prev.map(lesson => 
+            //     lesson.id === lessonId ? { ...lesson, completed: true } : lesson
+            //     )
+            // );
+            //  // Actualizar lecciones del tema actual
+            // setCurrentTopicLessons(prev => 
+            //     prev.map(lesson => 
+            //     lesson.idLesson === lessonId ? { ...lesson, completed: true } : lesson
+            //     )
+            // );
+
+            //  // Si la lección actual es la que se completó, actualizarla
+            // if (currentLesson?.idLesson === lessonId) {
+            //     const updatedLesson = { ...currentLesson, completed: true };
+            //     setCurrentLesson(updatedLesson);
+            //     localStorage.setItem('leccionActual', JSON.stringify(updatedLesson));
+            // }
+
+            return {succes: true, data: response.data}
+        } catch (error) {
+            console.error("Error al marcar lección como completada: ", error);
+            setError('Error al actualizar progreso');
+            return {succes: false};
+        }
+    };
+
+    //Calcular lecciones completadas
+    const leccionesCompletadas = () => {
+
+    };
 
     // Refrescar datos de progreso
     const refreshProgress = async () => {
@@ -175,7 +320,11 @@ export const CourseContentProvider = ({children}) => {
                 error,
                 selectTopic,
                 selectLesson,
-                // completeLesson,
+                completeLesson,
+                completeTopic,
+                lessonsComplete,
+                totalLessonsComplete,
+                totalTopicsComplete,
                 // checkTopicCompletion,
                 // calculateCourseProgress,
                 // calculateTopicProgress,

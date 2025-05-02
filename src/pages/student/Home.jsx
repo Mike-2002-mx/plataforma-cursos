@@ -5,6 +5,7 @@ import SeccionProgreso from "../../components/SeccionProgreso";
 import BarraLateralHome from "../../components/BarraLateralHome";
 import TarjetaCursoHome from "../../components/TarjetaCursoHome";
 import { useCourses } from "../../context/CoursesContext";
+import { useCourseContent } from "../../context/CourseContentContext";
 import axios from "axios";
 import './home.css';
 
@@ -20,6 +21,12 @@ const Home =  () =>{
         selectCourse, 
         enrollInCourse 
     } = useCourses();
+
+    const {
+        lessonsComplete,
+        totalLessonsComplete,
+        totalTopicsComplete
+    } = useCourseContent();
     
     // Verificar autenticación
     useEffect(() => {
@@ -85,9 +92,9 @@ const Home =  () =>{
                     </div>
 
                     <SeccionProgreso 
-                        temasCompletados={0} 
-                        listaActividadesCompletadas={recentActivities} 
-                        leccionesCompletadas={0}
+                        temasCompletados={totalTopicsComplete || 0} 
+                        listaActividadesCompletadas={lessonsComplete}
+                        leccionesCompletadas={totalLessonsComplete || 0 }
                     />
                     
                     <h2>Cursos disponibles</h2>

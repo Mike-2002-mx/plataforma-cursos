@@ -22,6 +22,10 @@ const BarraLateralHome = ({}) =>{
         if(!isAuthenticated){
             console.log("Usuario no autenticado, redirigiendo a login");
             navigate('/login');
+        } else{
+            const name = user?.username
+            const a = name.charAt(0);
+            setAvatar(a);
         }
     },[isAuthenticated, navigate])
 
@@ -37,11 +41,9 @@ const BarraLateralHome = ({}) =>{
     }
 
     //Mostrar avatar y rol
-    useEffect(() =>{
-        const name = user?.username
-        const a = name.charAt(0);
-        setAvatar(a);
-    }, [])
+    // useEffect(() =>{
+        
+    // }, [])
     
 
     return (
@@ -70,6 +72,11 @@ const BarraLateralHome = ({}) =>{
                         <span className="material-icons icon">settings</span>
                         Ajustes
                     </button>
+                    <button className="btn" onClick={logout}>
+                        <span className="material-icons icon">logout</span>
+                        Cerrar sesión
+                    </button>
+                    
                 </div>
                 <div className="menu-section">
                     <h3 className="section-title">Mis cursos</h3>
