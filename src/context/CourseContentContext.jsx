@@ -2,12 +2,14 @@ import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useCourses } from "./CoursesContext";
+import { useLanguage } from "./LanguajeContext";
 
 //Crear el contexto
 const CourseContentContext = createContext();
 
 export const CourseContentProvider = ({children}) => {
 
+    
     const [currentTopic, setCurrentTopic] = useState(null);
     const [currentLesson, setCurrentLesson] = useState(null);
     const [topicsProgress, setTopicsProgress] = useState([]);
@@ -23,6 +25,7 @@ export const CourseContentProvider = ({children}) => {
 
     const {user} = useAuth();
     const {currentCourse} = useCourses();
+    const {currentLanguage } = useLanguage();
 
     //Cargar temas del curso
     useEffect(() => {
@@ -31,9 +34,10 @@ export const CourseContentProvider = ({children}) => {
 
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/progressTopic/byUser/${user.id}`, {
+                const response = await axios.get(`http://localhost:8080/progressTopic/byUserAndLanguage/${user.id}`, {
                     headers: {
-                        Authorization: `Bearer ${user.token}`
+                        Authorization: `Bearer ${user.token}`,
+                        'Accept-Language': currentLanguage
                     }
                 });
 
@@ -126,9 +130,10 @@ export const CourseContentProvider = ({children}) => {
 
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/progressLesson/byUser/${user.id}`, {
+                const response = await axios.get(`http://localhost:8080/progressLesson/byUserAndLanguage/${user.id}`, {
                     headers: {
-                        Authorization: `Bearer ${user.token}`
+                        Authorization: `Bearer ${user.token}`,
+                        'Accept-Language': currentLanguage
                     }
                 });
 
@@ -276,8 +281,11 @@ export const CourseContentProvider = ({children}) => {
         try {
         // Refrescar temas
         if (currentCourse?.id && user?.id) {
-            const topicsResponse = await axios.get(`http://localhost:8080/progressTopic/byUser/${user.id}`, {
-            headers: { Authorization: `Bearer ${user.token}` }
+            const topicsResponse = await axios.get(`http://localhost:8080/progressTopic/byUserAndLanguage/${user.id}`, {
+            headers: { 
+                Authorization: `Bearer ${user.token}`,
+                'Accept-Language': currentLanguage
+                }
             });
             
             const allTopics = topicsResponse.data;
@@ -289,8 +297,12 @@ export const CourseContentProvider = ({children}) => {
         
         // Refrescar lecciones
         if (currentTopic?.idTopic && user?.id) {
-            const lessonsResponse = await axios.get(`http://localhost:8080/progressLesson/byUser/${user.id}`, {
-            headers: { Authorization: `Bearer ${user.token}` }
+            const lessonsResponse = await axios.get(`http://localhost:8080/progressLesson/byUserAndLanguage/${user.id}`, {
+                headers: 
+                { 
+                    Authorization: `Bearer ${user.token}`,
+                    'Accept-Language': currentLanguage 
+                }
             });
             
             const allLessons = lessonsResponse.data;

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import LanguageSwitcher from "../../components/LanguageSwitcher";
+import { useLanguage } from "../../context/LanguajeContext";
 import axios from 'axios';
 import './login.css';
+import { useTranslation } from 'react-i18next';
 
 const Login = () =>{
     const [email, setEmail] = useState('');
@@ -12,6 +15,8 @@ const Login = () =>{
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth();
+    const {currentLanguage} = useLanguage();
+    const {t}=useTranslation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,8 +61,9 @@ const Login = () =>{
 
     return (
         <div className="contenedor__login">
+            <LanguageSwitcher/>
             <div className="contenedor__formulario__login">
-                <h2>Iniciar Sesión</h2>
+                <h2>{t('sidebar.login')}</h2>
                 
                 {error && <div className="alerta alerta__error">{error}</div>}
                 

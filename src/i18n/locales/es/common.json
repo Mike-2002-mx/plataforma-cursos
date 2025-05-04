@@ -1,0 +1,9 @@
+{
+    "sidebar":{
+        "login": "Iniciar sesión",
+        "email": "Email",
+        "password": "Contraseña",
+        "question": "¿No tienes cuenta?",
+        "register": "Registrate aquí"
+    }
+}

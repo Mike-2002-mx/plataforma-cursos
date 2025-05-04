@@ -121,12 +121,19 @@ const PaginaLeccion = () =>{
                         {/* <div className="video-container">
                             
                         </div> */}
-                        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                        {currentLesson.typeContent === 'VIDEO' ? (
+                            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                             <VideoJS 
                                 options={videoJsOptions}
                                 onReady={handlePlayerReady}
                             />
                         </div>
+                        ):(
+                            <embed src="https://downloads.telmex.com/pdf/Info-Redes%20Sociales.pdf" width="90%" height="600px" type="application/pdf" />
+                        )
+                    }
+
+                        
                         <div className="lesson-description">
                             Description: {currentLesson.descriptionLesson}
                         </div>
@@ -139,7 +146,7 @@ const PaginaLeccion = () =>{
 
 export default PaginaLeccion;
 
-//                    <embed src="https://downloads.telmex.com/pdf/Info-Redes%20Sociales.pdf" width="90%" height="600px" type="application/pdf" />
+//                    
 /**
  * <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                                 <VideoJS 

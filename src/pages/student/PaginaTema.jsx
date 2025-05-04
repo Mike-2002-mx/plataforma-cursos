@@ -90,7 +90,7 @@ const PaginaTema = () => {
                                     key={leccion.id}
                                     nombreLeccion={leccion.titleLesson}
                                     isComplete={leccion.completed}
-                                    isVideo={leccion.lessonType === 'VIDEO'}
+                                    isVideo={leccion.typeContent === 'VIDEO'}
                                     onAction={() => handleSelectLesson(leccion)}
                                 /> 
                             ))

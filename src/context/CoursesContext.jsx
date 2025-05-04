@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
+import { useLanguage } from "./LanguajeContext";
 
 //Crear contexto
 const CoursesContext = createContext();
@@ -16,6 +17,8 @@ export const CoursesProvider = ({children}) =>{
     const [error, setError] = useState(null);
 
     const {user, isAuthenticated } = useAuth();
+    const {currentLanguage } = useLanguage();
+
 
     //Obtener todos los cursos
     const fetchAllCourses = async () => {
@@ -23,9 +26,10 @@ export const CoursesProvider = ({children}) =>{
 
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:8080/courses/allCourses', {
+            const response = await axios.get('http://localhost:8080/courses/allCoursesByLanguage', {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
+                    'Accept-Language': currentLanguage
                 },
             });
             setAllCourses(response.data);
@@ -95,7 +99,7 @@ export const CoursesProvider = ({children}) =>{
             }
         };
         loadCoursesData();
-    }, [isAuthenticated, user]);
+    }, [isAuthenticated, user, currentLanguage]);
 
         // Función para inscribirse a un curso
     const enrollInCourse = async (courseId, course) => {

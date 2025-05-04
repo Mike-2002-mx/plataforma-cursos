@@ -21,7 +21,7 @@ const SeccionProgreso = ({temasCompletados, leccionesCompletadas, listaActividad
                     <div className="progress-list">
                         <div className="progress-list">
                         <h3 style={{ fontSize: '16px', marginBottom: '16px', color: 'var(--gray-dark)' }}>
-                            Últimas actividades
+                            Últimas actividades completadas
                         </h3>
                         {listaActividadesCompletadas.map((activity) => (
                         <div key={activity.id} className="progress-item">

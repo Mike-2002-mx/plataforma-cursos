@@ -8,6 +8,8 @@ import BarraLateralHome from "../../components/BarraLateralHome";
 import { useAuth } from "../../context/AuthContext";
 import { useCourses } from "../../context/CoursesContext";
 import { useCourseContent } from "../../context/CourseContentContext";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../../context/LanguajeContext";
 
 const VistaCurso = () => {
 
@@ -20,6 +22,8 @@ const VistaCurso = () => {
         loading, 
         error
     } = useCourseContent();
+    const { currentLanguage, changeLanguage } = useLanguage();
+    const {t} = useTranslation();
     
     //Verificar autenticación del usuario
     useEffect(() => {
@@ -31,11 +35,11 @@ const VistaCurso = () => {
 
     //Verificar si hay curso seleccionado
     useEffect(() => {
-        if(!currentCourse && !loading){
+        if(!currentCourse & !loading){
             console.log("No hay curso seleccionado, redirigiendo a home");
             navigate('/home');
         }
-    },  [currentCourse, loading, navigate]);
+    },  [currentCourse, loading, navigate, currentLanguage]);
 
     //Manejar seleccion de tema
     const handleSelectTopic = (tema) =>{
@@ -54,7 +58,6 @@ const VistaCurso = () => {
                 
                 <div className="main-content">
                     {error && <div className="error-message">{error}</div>}
-                    
                     {currentCourse && (
                         <TarjetaPresentacionCurso
                             imagenCurso={currentCourse.imageUrl}
@@ -65,7 +68,6 @@ const VistaCurso = () => {
                             // progreso={calculateCourseProgress()}
                         />
                     )}
-                    
                     <h2>Temas del curso</h2>
                     {currentCourseTopics.length > 0 ? (
                         currentCourseTopics.map(tema => (

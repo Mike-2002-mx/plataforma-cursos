@@ -8,6 +8,7 @@ import { useCourses } from "../../context/CoursesContext";
 import { useCourseContent } from "../../context/CourseContentContext";
 import axios from "axios";
 import './home.css';
+import LanguageSwitcher from "../../components/LanguageSwitcher";
 
 const Home =  () =>{
 
@@ -68,7 +69,7 @@ const Home =  () =>{
             
                 <div className="main-content">
                     {error && <div className="error-message">{error}</div>}
-                    
+                    <LanguageSwitcher/>
                     <div className="welcome-section">
                         <h1>Bienvenida, {user?.username || user?.name || 'Estudiante'}</h1>
                         <p className="subtitle">Continúa tu aprendizaje donde lo dejaste</p>
