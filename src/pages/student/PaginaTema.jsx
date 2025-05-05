@@ -8,6 +8,8 @@ import './paginaTema.css';
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../context/LanguajeContext";
+import { useTranslation } from "react-i18next";
 
 
 const PaginaTema = () => {
@@ -24,6 +26,8 @@ const PaginaTema = () => {
         completeTopic,
         error
     } = useCourseContent();
+
+    const {t} = useTranslation();
 
     //Verificar curso existente   
     useEffect(() => {
@@ -56,7 +60,7 @@ const PaginaTema = () => {
     }, []);
 
     if(loading){
-        return <div className="loading">Cargando lecciones...</div>;
+        return <div className="loading">{t('paginaTema.loadingLessons')}</div>;
     }
 
     return(
@@ -78,12 +82,12 @@ const PaginaTema = () => {
                                 ></div>
                             </div>
                             {/* <p className="progress-text">{topicProgress}% completado</p> */}
-                            <p className="progress-text">60% completado</p>
+                            <p className="progress-text">60% {t('paginaTema.completed')}</p>
                         </div>
                     )}
                     
                     <div className="lesson-content">
-                        <h2>Contenido de la lección</h2>
+                        <h2>{t('paginaTema.lessonContent')}</h2>
                         {currentTopicLessons.length > 0 ? (
                             currentTopicLessons.map(leccion => (
                                 <DetallesLeccion 
@@ -95,7 +99,7 @@ const PaginaTema = () => {
                                 /> 
                             ))
                         ) : (
-                            <p>Este tema aún no tiene lecciones disponibles.</p>
+                            <p>{t('paginaTema.noLessons')}</p>
                         )}
                     </div>
                 </div>

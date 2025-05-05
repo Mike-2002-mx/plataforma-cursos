@@ -9,6 +9,8 @@ import { useCourseContent } from "../../context/CourseContentContext";
 import axios from "axios";
 import './home.css';
 import LanguageSwitcher from "../../components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
+
 
 const Home =  () =>{
 
@@ -28,7 +30,8 @@ const Home =  () =>{
         totalLessonsComplete,
         totalTopicsComplete
     } = useCourseContent();
-    
+
+    const {t} = useTranslation();
     // Verificar autenticación
     useEffect(() => {
         if (!isAuthenticated) {
@@ -59,7 +62,7 @@ const Home =  () =>{
     ];
 
     if (loading) {
-        return <div className="loading">Cargando cursos...</div>;
+        return <div className="loading">{t('viewHome.loadingCourses')}</div>;
     }
 
     return (
@@ -71,11 +74,11 @@ const Home =  () =>{
                     {error && <div className="error-message">{error}</div>}
                     <LanguageSwitcher/>
                     <div className="welcome-section">
-                        <h1>Bienvenida, {user?.username || user?.name || 'Estudiante'}</h1>
-                        <p className="subtitle">Continúa tu aprendizaje donde lo dejaste</p>
+                        <h1>{t('viewHome.welcome')}, {user?.username || user?.name || t('viewHome.student')}</h1>
+                        <p className="subtitle">{t('viewHome.messageContinue')}</p>
                     </div>
                     
-                    <h2>Mis cursos en progreso</h2>
+                    <h2>{t('viewHome.mesaggeMy_courses')}</h2>
                     <div className="courses-grid">
                         {enrolledCourses.length > 0 ? (
                             enrolledCourses.map(curso => (
@@ -88,7 +91,7 @@ const Home =  () =>{
                                 />
                             ))
                         ) : (
-                            <p>No tienes cursos en progreso. ¡Inscríbete en uno abajo!</p>
+                            <p>{t('viewHome.noCoursesInProgress')}</p>
                         )}
                     </div>
 
@@ -98,7 +101,7 @@ const Home =  () =>{
                         leccionesCompletadas={totalLessonsComplete || 0 }
                     />
                     
-                    <h2>Cursos disponibles</h2>
+                    <h2>{t('viewHome.availableCourses')}</h2>
                     <div className="courses-grid">
                         {availableCourses.length > 0 ? (
                             availableCourses.map(curso => (
@@ -111,7 +114,7 @@ const Home =  () =>{
                                 />
                             ))
                         ) : (
-                            <p>No hay cursos adicionales disponibles en este momento.</p>
+                            <p>{t('viewHome.noAdditionalCourses')}</p>
                         )}
                     </div>
                 </div>

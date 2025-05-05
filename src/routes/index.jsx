@@ -7,12 +7,14 @@ import { InstructorCoursesProvider } from "../context/InstructorCoursesContext";
 //Páginas publicas
 import Login from '../pages/auth/Login';
 import Register from "../pages/auth/Register";
-import Dashboard from "../pages/instructor/Dashboard";
 import Home from "../pages/student/Home";
 import Prueba from "../Prueba";
 import VistaCurso from "../pages/student/VistaCurso";
 import PaginaTema from "../pages/student/PaginaTema";
 import PaginaLeccion from "../pages/student/PaginaLeccion";
+
+import Dashboard from "../pages/instructor/Dashboard";
+import CrearCurso from "../pages/instructor/CrearCurso";
 
 const AppRoutes = () =>{
     return(
@@ -74,6 +76,13 @@ const AppRoutes = () =>{
             <Route path="/dashboard" element={
                 <InstructorCoursesProvider>
                     <Dashboard/>
+                </InstructorCoursesProvider>
+                }
+            />
+
+            <Route path="/crear-curso" element={
+                <InstructorCoursesProvider>
+                    <CrearCurso/>
                 </InstructorCoursesProvider>
                 }
             />

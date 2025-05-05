@@ -3,9 +3,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
 import { useAuth } from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const RegisterForm = () => {
     const {login, logout} = useAuth();
+    const {t} = useTranslation();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -98,13 +100,13 @@ const RegisterForm = () => {
 
     return (
         <div className="contenedor_registro">
-                <h2>Ingresa tus datos</h2>
+                <h2>{t('registerUser.enterData')}</h2>
                 {message && <p>{message}</p>}
                 <form onSubmit={handleSubmit} className="formulario__registro">
                     <input
                     type="text"
                     name="name"
-                    placeholder="Nombre"
+                    placeholder={t('registerUser.name')}
                     value={formData.name}
                     onChange={handleChange}
                     className="input__registro"
@@ -114,7 +116,7 @@ const RegisterForm = () => {
                     <input
                         type="email"
                         name="email"
-                        placeholder="Correo electrónico"
+                        placeholder={t('registerUser.email')}
                         value={formData.email}
                         onChange={handleChange}
                         className="input__registro"
@@ -124,7 +126,7 @@ const RegisterForm = () => {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder={t('registerUser.password')}
                         value={formData.password}
                         onChange={handleChange}
                         className="input__registro"
@@ -138,16 +140,16 @@ const RegisterForm = () => {
                     className="seleccion__registro"
                     required
                 >
-                    <option value="">Selecciona un rol</option>
-                    <option value="INSTRUCTOR">Instructor</option>
-                    <option value="STUDENT">Estudiante</option>
+                    <option value="">{t('registerUser.selectRole')}</option>
+                    <option value="INSTRUCTOR">{t('registerUser.instructor')}</option>
+                    <option value="STUDENT">{t('registerUser.student')}</option>
                 </select>
 
                 <button
                     type="submit"
                     className="boton__registrar"
                 >
-                Registrarse
+                {t('registerUser.student')}
                 </button>
             </form>
         </div>

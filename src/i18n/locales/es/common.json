@@ -1,9 +1,59 @@
 {
-    "sidebar":{
+    "loginPage":{
         "login": "Iniciar sesión",
         "email": "Email",
         "password": "Contraseña",
+        "loading": "Iniciando",
         "question": "¿No tienes cuenta?",
         "register": "Registrate aquí"
+    },
+    "registerUser": {
+        "enterData": "Ingresa tus datos",
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "selectRole": "Selecciona un rol",
+        "instructor": "Instructor",
+        "student": "Estudiante",
+        "register": "Registrarse"
+    },
+    "sidebar":{
+        "home":"Inicio",
+        "student": "Estudiante",
+        "logout":"Cerrar sesión",
+        "options":"Opciones",
+        "my_courses":"Mis cursos"
+    },
+    "viewHome":{
+        "loadingCourses": "Cargando cursos...",
+        "welcome":"Bienvenida",
+        "student": "Estudiante",
+        "messageContinue" :"Continúa tu aprendizaje donde lo dejaste",
+        "mesaggeMy_courses" :"Mis cursos en progreso",
+        "noCoursesInProgress": "No tienes cursos en progreso. ¡Inscríbete en uno abajo!",
+        "noAdditionalCourses": "No hay cursos adicionales disponibles en este momento.",
+        "availableCourses" :"Cursos disponibles"
+    },
+    "tarjetaCursoHome":{
+        "by" :"Creado por",
+        "continue" :"Continuar",
+        "starBtn" :"Comenzar"
+    },
+    "seccionProgreso":{
+        "my_progress" :"Mi progreso",
+        "topicCompletes" :"Temas completados",
+        "lessonsCompletes" :"Lecciones completadas",
+        "lastActivitiesComplete" :"Últimas actividades completadas"
+    },
+    "vistaCurso": {
+        "loadingTopics": "Cargando temas del curso...",
+        "courseTopics": "Temas del curso",
+        "noTopics": "Este curso aún no tiene temas disponibles"
+    },
+    "paginaTema": {
+        "loadingLessons": "Cargando lecciones...",
+        "completed": "completado",
+        "lessonContent": "Contenido de la lección",
+        "noLessons": "Este tema aún no tiene lecciones disponibles."
     }
 }

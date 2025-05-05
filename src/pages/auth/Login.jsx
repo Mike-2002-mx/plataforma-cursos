@@ -8,6 +8,7 @@ import axios from 'axios';
 import './login.css';
 import { useTranslation } from 'react-i18next';
 
+
 const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');   
@@ -16,7 +17,7 @@ const Login = () =>{
     const navigate = useNavigate();
     const { login } = useAuth();
     const {currentLanguage} = useLanguage();
-    const {t}=useTranslation();
+    const { t } = useTranslation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,13 +64,13 @@ const Login = () =>{
         <div className="contenedor__login">
             <LanguageSwitcher/>
             <div className="contenedor__formulario__login">
-                <h2>{t('sidebar.login')}</h2>
+                <h2>{t('loginPage.login')}</h2>
                 
                 {error && <div className="alerta alerta__error">{error}</div>}
                 
                 <form onSubmit={handleSubmit}>
                 <div className="grupo__formulario">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('loginPage.email')}</label>
                     <input
                     type="email"
                     id="email"
@@ -80,7 +81,7 @@ const Login = () =>{
                 </div>
                 
                 <div className="grupo__formulario">
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="password">{t('loginPage.password')}</label>
                     <input
                     type="password"
                     id="password"
@@ -95,12 +96,12 @@ const Login = () =>{
                     className="boton__iniciar__sesion"
                     disabled={loading}
                 >
-                    {loading ? 'Iniciando...' : 'Iniciar sesión'}
+                    {loading ? t('loading') : t('loginPage.login')}
                 </button>
                 </form>
                 
                 <p className="link__registro">
-                ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+                {t('loginPage.question')} <Link to="/register">{t('loginPage.register')}</Link>
                 </p>
             </div>
         </div>

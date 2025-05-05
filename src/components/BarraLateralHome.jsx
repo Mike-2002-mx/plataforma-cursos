@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './barraLateralHome.css';
 import { useCourses } from '../context/CoursesContext';
+import { useTranslation } from 'react-i18next';
 
 
 const BarraLateralHome = ({}) =>{
@@ -17,6 +18,7 @@ const BarraLateralHome = ({}) =>{
     } = useCourses();
     const [avatar, setAvatar] = useState('');
 
+    const {t} = useTranslation();
     //Verificar autenticación
     useEffect(() => {
         if(!isAuthenticated){
@@ -51,22 +53,22 @@ const BarraLateralHome = ({}) =>{
             <div className="sidebar">
                 <div className="logo-container">
                     <img src="https://cdn-icons-png.flaticon.com/512/5186/5186387.png" alt="Logo" className="logo"/>
-                    <h1 className="course-title">Página de inicio</h1>
+                    <h1 className="course-title">{t('sidebar.home')}</h1>
                 </div>
                 
                 <div className="user-card">
                     <div className="avatar">{avatar}</div>
                     <div className="user-info">
                         <h4>{user?.username}</h4>
-                        <span className="badge">Estudiante</span>
+                        <span className="badge">{t('sidebar.student')}</span>
                     </div>
                 </div>
                 
                 <div className="menu-section">
-                    <h3 className="section-title">Opciones</h3>
+                    <h3 className="section-title">{t('sidebar.options')}</h3>
                     <button onClick={naviteHome} className="btn">
                         <span className="material-icons icon">home</span>
-                        Inicio
+                        {t('sidebar.home')}
                     </button>
                     <button className="btn">
                         <span className="material-icons icon">settings</span>
@@ -74,12 +76,12 @@ const BarraLateralHome = ({}) =>{
                     </button>
                     <button className="btn" onClick={logout}>
                         <span className="material-icons icon">logout</span>
-                        Cerrar sesión
+                        {t('sidebar.logout')}
                     </button>
                     
                 </div>
                 <div className="menu-section">
-                    <h3 className="section-title">Mis cursos</h3>
+                    <h3 className="section-title">{t('sidebar.my_courses')}</h3>
                     {enrolledCourses && enrolledCourses.map(curso => (
                         <button 
                         className="btn"

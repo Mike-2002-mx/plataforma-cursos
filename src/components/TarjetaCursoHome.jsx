@@ -1,16 +1,18 @@
+import { useTranslation } from 'react-i18next';
 import './tarjetaCursoHome.css';
 
 const TarjetaCursoHome = ( {imagenPortada,nombreCurso, isInscrito, onAction}) =>{
+    const {t} = useTranslation();
     return(
         <>
             <div className="course-card">
                     <div className="course-header">
                         <div>
                             <h3 className="course-title">{nombreCurso}</h3>
-                            <p className="course-author">Por Miguel Mateo</p>
+                            <p className="course-author">{t('tarjetaCursoHome.by')} Miguel Mateo</p>
                         </div>
                         <button onClick={onAction} className="btn-continue">
-                            {isInscrito ? 'Continuar' : 'Comenzar'}
+                            {isInscrito ? t('tarjetaCursoHome.continue') : t('tarjetaCursoHome.starBtn')}
                             <span className="material-icons">
                             {isInscrito? 'arrow_forward' : 'play_arrow'}
                             </span>

@@ -48,7 +48,7 @@ const VistaCurso = () => {
     }
 
     if(loading){
-        return <div className="loading">Cargando temas del curso...</div>;
+        return <div className="loading">{t('vistaCurso.loadingTopics')}</div>;
     }
 
     return (
@@ -68,7 +68,7 @@ const VistaCurso = () => {
                             // progreso={calculateCourseProgress()}
                         />
                     )}
-                    <h2>Temas del curso</h2>
+                    <h2>{t('vistaCurso.courseTopics')}</h2>
                     {currentCourseTopics.length > 0 ? (
                         currentCourseTopics.map(tema => (
                             <DetallesTema
@@ -80,7 +80,7 @@ const VistaCurso = () => {
                             />
                         ))
                     ) : (
-                        <p>Este curso aún no tiene temas disponibles.</p>
+                        <p>{t('vistaCurso.noTopics')}</p>
                     )}
                     
                 </div>

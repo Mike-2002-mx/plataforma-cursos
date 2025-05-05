@@ -1,9 +1,59 @@
 {
+    "loginPage":{
+        "login": "Ticcehuia",
+        "email": "Correo electrónico",
+        "password": "Tlapohualiztli",
+        "loading": "Kemaj peua",
+        "question": "Amo ticpia tapowua?",
+        "register": "Shimochota nican"
+    },
+    "registerUser": {
+        "enterData": "Shpanoc teha",
+        "name": "tocai",
+        "email": "Correo electrónico",
+        "password": "Tlapohualiztli",
+        "selectRole": "catieja ticneki",
+        "instructor": "Tlamachtiani",
+        "student": "Telpochitl",
+        "register": "Shimochota"
+    },
     "sidebar":{
-        "login": "Tiknawatlahtoltin Tiknawatlahtoltin",
-        "email": "Niltze",
-        "password": "Tiknawatlahtoltin",
-        "question": "Nochuan Nochuan Nochuan?",
-        "register": "Nochuan Nochuan"
+        "home":"Shipewua",
+        "student": "Telpochitl",
+        "logout":"shtasacua",
+        "options":"shicnemili",
+        "my_courses":"Mis cursos"
+    },
+    "viewHome":{
+        "loadingCourses": "Ticceki tlamachtiloyan...",
+        "welcome":"Ximopanoltih ",
+        "student": "Telpochitl",
+        "messageContinue" :"Seguiro mo aprendizaje caníca ti cahuac",
+        "mesaggeMy_courses" :"No cursos en seguiro",
+        "noCoursesInProgress": "Axkan tlen ticchihua tlamachtiloyan. ¡Ticcuepaz se tlamachtiloyan nepan!",
+        "noAdditionalCourses": "Axkan axkan tlamachtiloyan ipan tlen techmoneki.",
+        "availableCourses" :"Tlamachtiloyan tlen techmoneki"
+    },
+    "tarjetaCursoHome":{
+        "by" :"Creado por",
+        "continue" :"seguiro",
+        "starBtn" :"pewua"
+    },
+    "seccionProgreso":{
+        "my_progress" :"No seguiro",
+        "topicCompletes" :"Temas completados",
+        "lessonsCompletes" :"Lecciones completadas",
+        "lastActivitiesComplete" :"Últimas actividades completadas"
+    },
+    "vistaCurso": {
+        "loadingTopics": "Ticceki tlen tlamachtiloyan tematl...",
+        "courseTopics": "Tematl tlen tlamachtiloyan",
+        "noTopics": "Inin tlamachtiloyan axkan axkan tema tlen techmoneki"
+    },
+    "paginaTema": {
+        "loadingLessons": "Ticceki tlen tlamachtilli...",
+        "completed": "tichiwa",
+        "lessonContent": "Tlen tlamachtilli",
+        "noLessons": "Inin tematl axkan axkan tlamachtilli tlen techmoneki."
     }
 }
