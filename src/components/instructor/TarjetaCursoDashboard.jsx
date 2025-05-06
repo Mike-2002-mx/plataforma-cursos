@@ -2,7 +2,7 @@ import { useInstructorCourses } from '../../context/InstructorCoursesContext';
 import './tarjetaCursoDashboard.css';
 
 
-const TarjetaCursoDashboard = ({imagenPortada, cursoTitulo, totalAlumnos, totalTemas}) =>{
+const TarjetaCursoDashboard = ({imagenPortada, cursoTitulo, totalAlumnos, totalTemas, onAction}) =>{
     const {
         instructorCourses
     } = useInstructorCourses();
@@ -14,7 +14,7 @@ const TarjetaCursoDashboard = ({imagenPortada, cursoTitulo, totalAlumnos, totalT
                 <div className="info">
                     <h4>{cursoTitulo}</h4>
                     <p>👥 {totalAlumnos} alumnos | 📚 {totalTemas} temas</p>
-                    <button className="btn-review">Revisar</button>
+                    <button className="btn-review" onClick={onAction}>Revisar</button>
                 </div>
             </div>
         </>

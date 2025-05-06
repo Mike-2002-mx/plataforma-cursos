@@ -1,27 +1,4 @@
-/* Variables de colores */
-:root {
-    --primary: #1A73E8;
-    --primary-light: #E8F0FE;
-    --secondary: #34A853;
-    --danger: #EA4335;
-    --gray-dark: #5F6368;
-    --gray-medium: #80868B;
-    --gray-light: #F1F3F4;
-    --white: #FFFFFF;
-    --shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
-    --shadow-hover: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149);
-  }
-  
-  /* Estilos generales */
-  body {
-    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-    background-color: var(--gray-light);
-    margin: 0;
-    padding: 20px;
-    color: var(--gray-dark);
-  }
-  
-  /* Contenedor del formulario */
+/* Contenedor del formulario */
   .course-form {
     max-width: 600px;
     margin: 0 auto;

@@ -1,9 +1,9 @@
-import { useStatem, useEffect } from "react";
+import {  useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useInstructorCourses } from "../../context/InstructorCoursesContext";
+import { useInstructorContent } from "../../context/InstructorContentContext";
 import BarraLateralDashboard from "../../components/instructor/BarraLateralDashboard";
-import TarjetaCursoHome from "../../components/TarjetaCursoHome";
 import TarjetaCursoDashboard from "../../components/instructor/TarjetaCursoDashboard";
 import './dashboard.css';
 
@@ -12,9 +12,12 @@ const Dashboard = () =>{
     const {isAuthenticated, user} = useAuth();
     const {
         instructorCourses,
+        selectCourse,
         loading, 
         error
     } = useInstructorCourses();
+
+
 
     //Verificar autenticación
     useEffect(() => {
@@ -24,6 +27,12 @@ const Dashboard = () =>{
         }
     }, [isAuthenticated, navigate]);
 
+    // Manejar selección de curso
+    const handleSelectCourse = (curso) => {
+        selectCourse(curso);
+        console.log(localStorage.getItem('cursoActual'));
+        navigate("/vista-curso");
+    };
 
     const navigateCreateCuourse= () =>{
         navigate("/crear-curso");
@@ -46,6 +55,7 @@ const Dashboard = () =>{
                                     cursoTitulo={curso.title}
                                     totalAlumnos={10}
                                     totalTemas={10}
+                                    onAction={() => handleSelectCourse(curso)}
                                 />
                             ))}
                         </div>

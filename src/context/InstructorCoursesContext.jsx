@@ -1,16 +1,19 @@
 import { createContext, useContext, useState, useEffect, Children } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
+import { useLanguage } from "./LanguajeContext";
 
 const InstructorCoursesContext = createContext();
 
 export const InstructorCoursesProvider = ({children}) => {
 
     const [instructorCourses, setInstructorCourses] = useState([]);
+    const [currentCourse, setCurrentCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const {user, isAuthenticated} = useAuth();
+    const {currentLanguage } = useLanguage(); 
 
     //Obtener cursos del Instructor
     const fetchIstructorCourses = async () => {
@@ -46,6 +49,15 @@ export const InstructorCoursesProvider = ({children}) => {
                 setInstructorCourses(courses);
                 //Guardar datos de los cusos en localStorage
                 localStorage.setItem('cursosInstructor', JSON.stringify(courses));
+                //Cargar curso actual en localStorage para persistencia
+                const savedCurrentCourse = localStorage.getItem('cursoActual');
+                if(savedCurrentCourse){
+                    try {
+                        setCurrentCourse(JSON.parse(savedCurrentCourse));
+                    } catch (error) {
+                        console.error("Error al parsear curso actual: ", error);
+                    }
+                }
             } catch (error) {
                 setError("Error al cargar los datos de cursos")
             }finally{
@@ -56,12 +68,19 @@ export const InstructorCoursesProvider = ({children}) => {
     },[isAuthenticated, user]);
 
 
+    //Función para seleccionar un curso como actual 
+    const selectCourse = (course) => {
+        setCurrentCourse(course);
+        localStorage.setItem('cursoActual', JSON.stringify(course));
+    };
 
 
     return(
         <InstructorCoursesContext.Provider
             value={{
                 instructorCourses,
+                currentCourse, 
+                selectCourse,
                 loading, 
                 error
             }}

@@ -1,24 +1,22 @@
-import axios from 'axios';
-import './crearCurso.css';
-import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useInstructorCourses } from "../../context/InstructorCoursesContext";
+import { useInstructorContent } from "../../context/InstructorContentContext";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const CrearCurso = () =>{
-
-    const preset_name = "abecedario";
-    const cloud_name = "do0g84jlj"
+const CrearTema = () =>{
 
     const [title, setTitle] = useState('');
     const [titleNahuatl, setTitleNahuatl] = useState('');
     const [description, setDescription] = useState('');
     const [descriptionNahuatl, setDescriptionNahuatl] = useState('');
-    const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
+
     const {isAuthenticated, user} = useAuth();
     const navigate= useNavigate();
-
+    const {currentCourse} = useInstructorCourses();
+    
     useEffect(() => {
             if (!isAuthenticated) {
                 console.log("Usuario no autenticado, redirigiendo a login");
@@ -26,35 +24,10 @@ const CrearCurso = () =>{
             }
         }, [isAuthenticated, navigate]);
 
-    const uploadImage = async (e) => {
-        const files = e.target.files;
-        const data = new FormData();
-        data.append('file', files[0]);
-        data.append('upload_preset', preset_name);
-
-        setLoading(true);
-
-        try {
-            const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/upload`, 
-                data
-            );
-            const mediaUrl = response.data.secure_url;
-            setImage(mediaUrl);
-            console.log(mediaUrl);
-        } catch (error) {
-            console.error("Upload failed", error);
-        }finally {
-            setLoading(false);
-        }
-    }
-
-
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        if(!title || !description || !image){
+        if(!title || !description){
             alert('Por favor completa los campos requeridos');
             return;
         }
@@ -62,56 +35,52 @@ const CrearCurso = () =>{
         try {
             setLoading(true);
         
-            const courseData = {
+            const topicData = {
                 title: title,
-                imageUrl: image,
                 description: description,
-                idInstructor: user.id 
+                courseId: currentCourse.id 
             };
 
-            const courseResponse = await axios.post(
-                'http://localhost:8080/courses',
-                courseData,
+            const topicResponse = await axios.post(
+                'http://localhost:8080/topics',
+                topicData,
                 {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
                 });
-            const newCourse = courseResponse.data;
+            const newTopic = topicResponse.data;
 
-            if (newCourse.id) {
+            if (newTopic.id) {
                 const translationData = {
                     languageCode: 'nah', 
                     translatedTitle: titleNahuatl,
                     translatedDescription: descriptionNahuatl,
-                    idCourse: newCourse.id
+                    topicId: newTopic.id
                 };
 
-                const courseTranslation = await axios.post('http://localhost:8080/courseTranslations', translationData, 
+                const topicTranslation = await axios.post('http://localhost:8080/topicTranslations', translationData, 
                     {
                         headers: {
                             Authorization: `Bearer ${user.token}`
                     }
                 });
-                console.log(courseTranslation.data)
+                console.log(topicTranslation.data)
 
                 setTitle('');
                 setTitleNahuatl('');
                 setDescription('');
                 setDescriptionNahuatl('');
-                setImage(null);
+                // navigate("vista-curso");
+
             }
 
         } catch (error) {
             const errorData = error.response?.data;
-            const errorMessage = errorData?.message || 'Error en el servidor';
-            
             console.error('Error detallado:', {
                 status: error.response?.status,
                 data: errorData
             });
-            
-            alert(`Error: ${errorMessage}`);
         }finally {
             setLoading(false);
         }
@@ -121,7 +90,7 @@ const CrearCurso = () =>{
     return (
         <form className="course-form" onSubmit={handleSubmit}>
             <div className="form-group">
-            <label htmlFor="title">Título del curso</label>
+            <label htmlFor="title">Título del tema</label>
             <input
                 type="text"
                 id="title"
@@ -141,7 +110,7 @@ const CrearCurso = () =>{
             </div>
             
             <div className="form-group">
-            <label htmlFor="description">Descripción del curso</label>
+            <label htmlFor="description">Descripción del tema</label>
             <textarea
                 id="description"
                 value={description}
@@ -150,37 +119,24 @@ const CrearCurso = () =>{
             </div>
             
             <div className="form-group">
-            <label htmlFor="descriptionNahuatl">Descripción del curso en Náhuatl</label>
+            <label htmlFor="descriptionNahuatl">Descripción del tema en Náhuatl</label>
             <textarea
                 id="descriptionNahuatl"
                 value={descriptionNahuatl}
                 onChange={(e) => setDescriptionNahuatl(e.target.value)}
             />
             </div>
-            
-            <div className="form-group">
-            <label htmlFor="image">Imagen de portada</label>
-            <input
-                type="file"
-                id="image"
-                onChange={(e)=>uploadImage(e)}
-            />
-            {loading ? (
-            <h3>Loading...</h3>
-            ) : (
-            <img src={image} alt="imagen subida"/>
-            )}
-            </div>
-    
+
             <button 
                 type="submit" 
                 className="submit-button"
                 disabled={loading}
             >
-                {loading ? 'Creando...' : 'Crear Curso'}
+                {loading ? 'Creando...' : 'Agregar tema'}
             </button>
         </form>
         );
+
 };
 
-export default CrearCurso;
+export default CrearTema;

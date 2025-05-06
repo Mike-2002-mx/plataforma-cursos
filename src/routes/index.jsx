@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { CoursesProvider } from "../context/CoursesContext";
 import { CourseContentProvider } from "../context/CourseContentContext";
 import { InstructorCoursesProvider } from "../context/InstructorCoursesContext";
+import { InstructorContentProvider } from "../context/InstructorContentContext";
 
 //Páginas publicas
 import Login from '../pages/auth/Login';
@@ -15,6 +16,8 @@ import PaginaLeccion from "../pages/student/PaginaLeccion";
 
 import Dashboard from "../pages/instructor/Dashboard";
 import CrearCurso from "../pages/instructor/CrearCurso";
+import DashboardCurso from "../pages/instructor/DashboardCurso";
+import CrearTema from "../pages/instructor/CrearTema";
 
 const AppRoutes = () =>{
     return(
@@ -82,7 +85,27 @@ const AppRoutes = () =>{
 
             <Route path="/crear-curso" element={
                 <InstructorCoursesProvider>
-                    <CrearCurso/>
+                    <InstructorContentProvider>
+                        <CrearCurso/>
+                    </InstructorContentProvider>
+                </InstructorCoursesProvider>
+                }
+            />
+
+            <Route path="/vista-curso" element={
+                <InstructorCoursesProvider>
+                    <InstructorContentProvider>
+                        <DashboardCurso/>
+                    </InstructorContentProvider>
+                </InstructorCoursesProvider>
+                }
+            />
+
+            <Route path="/crear-tema" element={
+                <InstructorCoursesProvider>
+                    <InstructorContentProvider>
+                        <CrearTema/>
+                    </InstructorContentProvider>
                 </InstructorCoursesProvider>
                 }
             />
