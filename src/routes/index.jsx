@@ -18,6 +18,8 @@ import Dashboard from "../pages/instructor/Dashboard";
 import CrearCurso from "../pages/instructor/CrearCurso";
 import DashboardCurso from "../pages/instructor/DashboardCurso";
 import CrearTema from "../pages/instructor/CrearTema";
+import DashboardTema from "../pages/instructor/DashboardTema";
+import CrearLeccion from "../pages/instructor/CrearLeccion";
 
 const AppRoutes = () =>{
     return(
@@ -105,6 +107,24 @@ const AppRoutes = () =>{
                 <InstructorCoursesProvider>
                     <InstructorContentProvider>
                         <CrearTema/>
+                    </InstructorContentProvider>
+                </InstructorCoursesProvider>
+                }
+            />
+
+            <Route path="/vista-tema" element={
+                <InstructorCoursesProvider>
+                    <InstructorContentProvider>
+                        <DashboardTema/>
+                    </InstructorContentProvider>
+                </InstructorCoursesProvider>
+                }
+            />
+
+            <Route path="/crear-leccion" element={
+                <InstructorCoursesProvider>
+                    <InstructorContentProvider>
+                        <CrearLeccion/>
                     </InstructorContentProvider>
                 </InstructorCoursesProvider>
                 }

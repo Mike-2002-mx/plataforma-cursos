@@ -40,24 +40,31 @@ const PaginaTema = () => {
     //Manejar selección de lección
     const handleSelectLesson = (leccion) => {
         selectLesson(leccion);
+        console.log(leccion);
         navigate('/leccion');
     }
 
+    //Verificar si todas las lecciones están completadas
     useEffect(() => {
-        let verificar=true;
-        currentTopicLessons.map(topicLesson => {
+        if (!currentTopic || !currentTopicLessons.length || !user) return;
+
+        let verificar = true;
+        
+        for (const topicLesson of currentTopicLessons) {
             console.log("Id lección: ", topicLesson.idLesson, ": ", topicLesson.completed);
-            if(!topicLesson.completed){
-                verificar=false;
+            if (!topicLesson.completed) {
+                verificar = false;
+                break;
             }
-        })
-        console.log(verificar);
-        if(verificar && !currentTopic.completed){
-            Promise.resolve().then(() => {
-                completeTopic(user.id, currentTopic.idTopic).catch(err => console.error("Error al completar el tema", err));
-            });
         }
-    }, []);
+        
+        console.log("¿Todas las lecciones completadas?", verificar);
+        
+        if (verificar && !currentTopic.completed) {
+            completeTopic(user.id, currentTopic.idTopic)
+                .catch(err => console.error("Error al completar el tema", err));
+        }
+    }, [currentTopic, currentTopicLessons, user, completeTopic]);
 
     if(loading){
         return <div className="loading">{t('paginaTema.loadingLessons')}</div>;
@@ -94,7 +101,7 @@ const PaginaTema = () => {
                                     key={leccion.id}
                                     nombreLeccion={leccion.titleLesson}
                                     isComplete={leccion.completed}
-                                    isVideo={leccion.typeContent === 'VIDEO'}
+                                    typeContent={leccion.typeContent}
                                     onAction={() => handleSelectLesson(leccion)}
                                 /> 
                             ))
@@ -109,12 +116,3 @@ const PaginaTema = () => {
 }
 
 export default PaginaTema;
-
-/*          {lecciones.map(leccion => (
-                <DetallesLeccion 
-                    key={leccion.id}
-                    nombreLeccion={leccion.title}
-                    isComplete={false}
-                    onAction={()=>verLeccion(leccion)}
-                />
-            ))}*/

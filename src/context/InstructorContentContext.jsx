@@ -13,6 +13,7 @@ export const InstructorContentProvider = ({children}) =>{
     const [totalInscritos, setTotalInscritos] = useState(null);
     const [temasCurso, setTemasCurso] = useState([]);
     const [totalTemas, setTotalTemas] = useState(null);
+    const [temaActual, setTemaActual] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     
@@ -80,6 +81,13 @@ export const InstructorContentProvider = ({children}) =>{
         fetchTopicsCourse();
     }, [currentCourse, user]);
 
+    //Función para seleccionar un tema como actual
+    const selectTopic = (tema) =>{
+        setTemaActual(tema);
+        localStorage.setItem('temaActual', JSON.stringify(tema));
+    };
+
+
     return(
         <InstructorContentContext.Provider
             value={{
@@ -87,6 +95,8 @@ export const InstructorContentProvider = ({children}) =>{
                 totalInscritos,
                 temasCurso,
                 totalTemas,
+                selectTopic,
+                temaActual,
                 loading,
                 error
             }}

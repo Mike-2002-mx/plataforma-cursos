@@ -1,6 +1,6 @@
 import './temaDetallesIns.css';
 
-const TemaDetallesIns = ({tituloTema}) =>{
+const TemaDetallesIns = ({tituloTema, onAction}) =>{
     return(
         <>
             <div className="topic-list">
@@ -8,7 +8,7 @@ const TemaDetallesIns = ({tituloTema}) =>{
                     <div className="checkbox"></div>
                         <p className="topic-title">{tituloTema}</p>
                         <span className="topic-lecciones">2 lecciones</span>
-                        <button className="btn-crearTema">
+                        <button className="btn-crearTema" onClick={onAction}>
                             Revisar
                         </button>
                 </div>

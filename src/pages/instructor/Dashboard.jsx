@@ -30,7 +30,7 @@ const Dashboard = () =>{
     // Manejar selección de curso
     const handleSelectCourse = (curso) => {
         selectCourse(curso);
-        console.log(localStorage.getItem('cursoActual'));
+        console.log(JSON.parse(localStorage.getItem('cursoActual')));
         navigate("/vista-curso");
     };
 

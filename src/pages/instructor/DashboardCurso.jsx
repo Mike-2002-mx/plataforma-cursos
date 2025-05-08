@@ -5,16 +5,44 @@ import './dashboardCurso.css';
 import { useInstructorCourses } from "../../context/InstructorCoursesContext";
 import { useInstructorContent } from "../../context/InstructorContentContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 const DashboardCurso = () => {
 
     const {currentCourse} = useInstructorCourses();
-    const {estudiantesInscritos, totalInscritos, temasCurso, totalTemas} = useInstructorContent();
+    const {
+        estudiantesInscritos,
+        totalInscritos, 
+        temasCurso, 
+        totalTemas,
+        selectTopic,
+    } = useInstructorContent();
     const navigate = useNavigate();
 
+    const {user, isAuthenticated}= useAuth();
+
+    //Verificar autenticación
+        useEffect(() => {
+            if (!isAuthenticated) {
+                console.log("Usuario no autenticado, redirigiendo a login");
+                navigate('/login');
+            }
+        }, [isAuthenticated, navigate]);
+
+    //Navegar a crear tema
     const navigateCrearTema =() =>{
         navigate("/crear-tema");
     }
+
+    //Manejar la selección de tema
+    const handleSelectTopic = (tema) =>{
+        selectTopic(tema);
+        console.log(JSON.parse(localStorage.getItem('temaActual')));
+        navigate("/vista-tema");
+    };
+
+    
 
     return(
         <>
@@ -67,7 +95,8 @@ const DashboardCurso = () => {
                             temasCurso.map(tema => (
                                 <TemaDetallesIns
                                     key={tema.id} 
-                                    tituloTema={tema.title} 
+                                    tituloTema={tema.title}
+                                    onAction={() => handleSelectTopic(tema)} 
                                 />
                             ))
                         ) : (
