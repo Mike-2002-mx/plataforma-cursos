@@ -52,14 +52,14 @@
   
   .datos__curso p:nth-child(3) {
     font-size: 14px;
-    color: var(--secondary);
+    color: var(--primary);
     font-weight: 500;
     margin-bottom: 8px;
   }
   
   .datos__curso p:nth-child(4) {
     font-size: 14px;
-    color: var(--white);
+    color: var(--text-dark);
     background-color: var(--secondary);
     display: inline-block;
     padding: 6px 14px;

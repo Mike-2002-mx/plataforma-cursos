@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
-    background: #f1f5f9;
+    min-height: 100vh;
     padding: 2rem;
 }
 
+
 .contenedor__formulario__login {
-    background: white;
+    background: var(--background);
     padding: 2.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@
 }
 
 .contenedor__formulario__login h2 {
-    color: #1a73e8;
+    color: var(--text-dark);
     text-align: center;
     margin-bottom: 2rem;
     font-size: 1.8rem;
@@ -35,7 +35,7 @@
 
 .grupo__formulario label {
     display: block;
-    color: #5f6368;
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     font-weight: 500;
@@ -44,7 +44,7 @@
 .grupo__formulario input {
     width: 90%;
     padding: 0.8rem 1rem;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--text-light);
     border-radius: 8px;
     font-size: 1.2rem;
     transition: border-color 0.3s ease;
@@ -52,18 +52,18 @@
 
 .grupo__formulario input:focus {
     outline: none;
-    border-color: #1a73e8;
+    border-color: var(--secondary);
     box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
 }
 
 .boton__iniciar__sesion {
     width: 100%;
     padding: 1rem;
-    background: #1a73e8;
-    color: white;
+    background: var(--primary);
+    color: var(--text-dark);
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -71,7 +71,7 @@
 }
 
 .boton__iniciar__sesion:hover {
-    background: #1557b0;
+    background: var(--secondary);
     transform: scale(1.02);
 }
 /* 
@@ -84,19 +84,19 @@
 .link__registro {
     text-align: center;
     margin-top: 1.5rem;
-    color: #5f6368;
+    color: var(--text-dark);
     font-size: 1rem;
 }
 
 .link__registro a {
-    color: #1a73e8;
+    color: var(--primary);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .link__registro a:hover {
-    color: #1557b0;
+    color: var(--secondary);
     text-decoration: underline;
 }
 

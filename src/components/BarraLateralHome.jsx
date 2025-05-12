@@ -42,22 +42,16 @@ const BarraLateralHome = ({}) =>{
         navigate('/home');
     }
 
-    //Mostrar avatar y rol
-    // useEffect(() =>{
-        
-    // }, [])
-    
-
     return (
         <>
             <div className="sidebar">
                 <div className="logo-container">
                     <img src="https://cdn-icons-png.flaticon.com/512/5186/5186387.png" alt="Logo" className="logo"/>
-                    <h1 className="course-title">{t('sidebar.home')}</h1>
+                    <h1 className="page-title">{t('landing.title')}</h1>
                 </div>
                 
                 <div className="user-card">
-                    <div className="avatar">{avatar}</div>
+                    <div className="avatarHome">{avatar}</div>
                     <div className="user-info">
                         <h4>{user?.username}</h4>
                         <span className="badge">{t('sidebar.student')}</span>
@@ -66,15 +60,11 @@ const BarraLateralHome = ({}) =>{
                 
                 <div className="menu-section">
                     <h3 className="section-title">{t('sidebar.options')}</h3>
-                    <button onClick={naviteHome} className="btn">
+                    <button onClick={naviteHome} className="btnLateral">
                         <span className="material-icons icon">home</span>
                         {t('sidebar.home')}
                     </button>
-                    <button className="btn">
-                        <span className="material-icons icon">settings</span>
-                        Ajustes
-                    </button>
-                    <button className="btn" onClick={logout}>
+                    <button className="btnLateral" onClick={logout}>
                         <span className="material-icons icon">logout</span>
                         {t('sidebar.logout')}
                     </button>
@@ -84,11 +74,11 @@ const BarraLateralHome = ({}) =>{
                     <h3 className="section-title">{t('sidebar.my_courses')}</h3>
                     {enrolledCourses && enrolledCourses.map(curso => (
                         <button 
-                        className="btn"
+                        className="btnLateral"
                         onClick={() => handleSelectCourse(curso)}
                         key={curso.id}>
                         <span className="material-icons icon">book</span>
-                            {curso.title}
+                            <p className='lateralCursoTitle'>{curso.title}</p>
                         </button>
                     ))}
                 </div>

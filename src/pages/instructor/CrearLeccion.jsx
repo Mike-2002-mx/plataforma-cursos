@@ -130,7 +130,7 @@ const CrearLeccion = () =>{
                     }
                 });
             const newLesson = lessonResponse.data;
-
+            console.log(newLesson);
             if (newLesson.id) {
                 const translationData = {
                     languageCode: 'nah', 

@@ -77,6 +77,8 @@ export const CoursesProvider = ({children}) =>{
                 const enrolled = courses.filter(course => enrolledIds.includes(course.id));
                 const available = courses.filter(course => !enrolledIds.includes(course.id));
 
+                console.log(enrolled);
+
                 setEnrolledCourses(enrolled);
                 setAvailableCourses(available);
 

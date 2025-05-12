@@ -10,20 +10,28 @@
 }
 
 .welcome-section {
-    margin-bottom: 32px;
+    /* background: linear-gradient(135deg, var(--primary-light) 10%,  10%); */
+    background: linear-gradient(200deg, var(--primary-light), var(--background));
+    padding-top: 10px;
+    padding-left: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--primary);
 }
 
-h1 {
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--gray-dark);
-    margin-bottom: 8px;
+.welcome-continue{
+    color: var(--text-dark);
 }
 
 .subtitle {
-    font-size: 16px;
-    color: var(--gray-medium);
+    color: var(--text-dark);
+    font-size: 1.2rem;
     margin-bottom: 25px;
+}
+
+.welcome-misCursos{
+    padding-left: 10px;
+    border-left: 4px solid var(--primary);
 }
 
 
@@ -32,6 +40,12 @@ h1 {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 24px;
     margin-bottom: 32px;
+}
+
+.availableCourses{
+    color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 800;
 }
 
 

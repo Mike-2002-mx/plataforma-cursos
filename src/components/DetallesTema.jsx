@@ -5,7 +5,7 @@ import './detallesTema.css';
 const DetallesTema = ({tituloTema, totalLecciones, isComplete, onAction}) =>{
     return(
         <>
-            <div className="contenedor__tema">
+            <div onClick={onAction} className="contenedor__tema">
                 <p>{tituloTema}</p>
                 <p>{totalLecciones} lecciones</p>
                 {isComplete ? (

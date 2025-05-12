@@ -68,8 +68,9 @@ const VistaCurso = () => {
                             // progreso={calculateCourseProgress()}
                         />
                     )}
-                    <h2>{t('vistaCurso.courseTopics')}</h2>
+                    <h2 className="tituloTemasCurso">{t('vistaCurso.courseTopics')}</h2>
                     {currentCourseTopics.length > 0 ? (
+                        
                         currentCourseTopics.map(tema => (
                             <DetallesTema
                                 key={tema.idTopic}

@@ -10,8 +10,10 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
     const [tabActive, setTabActive] = useState(true);
     const [loading, setLoading]= useState(true);
     const [error, setError] = useState(null);
+    const timerRef = useRef(null)
     const playerRef = useRef(null);
     const requiredViewTime  = 15;
+    const viewedRef = useRef(false)
 
     //Opciones para VideoJS
     const videoJsOptions = {
@@ -25,16 +27,16 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
                 type: 'video/mp4'
             },
         ],
-        // tracks: [
-        //     {
-        //         kind: 'subtitles',
-        //         src: '/public/subtitulos/Cómo CREAR un CORREO electrónico de GMAIL 2025.vtt',
-        //         srclang: 'nah', 
-        //         label: 'Náhuatl',
-        //         default: true,
-        //         mode: 'showing',
-        //     }
-        // ],
+        tracks: [
+            {
+                kind: 'subtitles',
+                src: '/public/subtitulos/Cómo CREAR un CORREO electrónico de GMAIL 2025.vtt',
+                srclang: 'nah', 
+                label: 'Náhuatl',
+                default: true,
+                mode: 'showing',
+            }
+        ],
     };
 
     //Para reproducir video
@@ -60,22 +62,22 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
 
     }
 
-    /**Lógica para marcar la lección como vista */
-    // Esto es para detectar si el componente esta visible o no
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-        ([entry]) => {
-            setIsVisible(entry.isIntersecting);
-        },
-        { threshold: 0.5 } // Al menos 50% visible
-        );
+    // /**Lógica para marcar la lección como vista */
+    // // Esto es para detectar si el componente esta visible o no
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(
+    //     ([entry]) => {
+    //         setIsVisible(entry.isIntersecting);
+    //     },
+    //     { threshold: 0.5 } // Al menos 50% visible
+    //     );
 
-        if (containerRef.current) {
-        observer.observe(containerRef.current);
-        }
+    //     if (containerRef.current) {
+    //     observer.observe(containerRef.current);
+    //     }
 
-        return () => observer.disconnect();
-    }, []);
+    //     return () => observer.disconnect();
+    // }, []);
 
     // Detectar si la pestaña esta activa o no
     useEffect(() => {
@@ -89,21 +91,15 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
 
     // // Contar tiempo activo
     useEffect(() => {
-        let interval;
-        if (isVisible && tabActive) {
-        interval = setInterval(() => {
-            setActiveTime((prev) => {
-            const newTime = prev + 1;
-            if (newTime >= requiredViewTime) {
-                onContentViewed();
-            }
-            return newTime;
-            });
-        }, 1000);
-        }
 
-        return () => clearInterval(interval);
-    }, [isVisible, tabActive, onContentViewed]);
+        const timer = setTimeout(() => {
+            onContentViewed();
+        }, 30000);
+    
+        return () => clearTimeout(timer); 
+
+    }, [onContentViewed]);
+
 
     // Verificar si la URL existe
     useEffect(() => {
@@ -188,7 +184,7 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
                     </>
                 );
 
-            case 'image':
+            case 'imagen':
                 return(
                     <>
                         <div className="image-container">
@@ -216,11 +212,11 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
     return (
         <div ref={containerRef} className="media-renderer">
             {renderMedia()}
-            {!loading && !error && (
+            {/* {!loading && !error && (
                 <div className="view-progress">
                     Tiempo visualizado: {activeTime} / {requiredViewTime}s
                 </div>
-            )}
+            )} */}
         </div>
     )
 };

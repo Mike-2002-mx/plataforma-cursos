@@ -14,6 +14,7 @@ export const InstructorContentProvider = ({children}) =>{
     const [temasCurso, setTemasCurso] = useState([]);
     const [totalTemas, setTotalTemas] = useState(null);
     const [temaActual, setTemaActual] = useState([]);
+    const [leccionesTema, setLeccionesTema] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     
@@ -68,6 +69,7 @@ export const InstructorContentProvider = ({children}) =>{
                     }
                 });
                 const topicsCourse = response.data;
+                console.log(topicsCourse);
                 const totalTopics = topicsCourse.length;
                 setTotalTemas(totalTopics);
                 setTemasCurso(topicsCourse);
@@ -86,6 +88,22 @@ export const InstructorContentProvider = ({children}) =>{
         setTemaActual(tema);
         localStorage.setItem('temaActual', JSON.stringify(tema));
     };
+
+    //Cargar lecciones cuando se selecciones un tema
+    // useEffect(() => {
+    //     const fetchLessonsTopic = async () => {
+    //         if(!temaActual || !user?.id || !user?.token) return;
+
+    //         setLoading(true);
+    //         try {
+    //             const response = await axios.ge
+
+    //         } catch (error) {
+                
+    //         }
+    //     }
+
+    // }, []);
 
 
     return(

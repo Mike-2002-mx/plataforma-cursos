@@ -1,4 +1,12 @@
 {
+    "landing": {
+        "title": "Artesanas rurales",
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "headline": "Aprende habilidades digitales básicas",
+        "description": "Una página con contenido multimedia para que puedas aprender habilidades digitales a tu ritmo.",
+        "languageQuestion": "¿En qué idioma quieres continuar?"
+    },
     "loginPage":{
         "login": "Iniciar sesión",
         "email": "Email",

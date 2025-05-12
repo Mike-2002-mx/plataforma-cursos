@@ -12,13 +12,13 @@ const LanguageSwitcher = () => {
                 onClick={() => changeLanguage('es')}
                 className={currentLanguage === 'es' ? 'active' : ''}
             >
-                {t('common:spanish')}
+                {t('common:Español')}
             </button>
             <button 
                 onClick={() => changeLanguage('nah')}
                 className={currentLanguage === 'nah' ? 'active' : ''}
             >
-                {t('common:nahuatl')}
+                {t('common:Náhuatl')}
             </button>
         </div>
     );

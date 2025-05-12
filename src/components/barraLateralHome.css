@@ -1,6 +1,6 @@
 /* Sidebar Styles */
 .sidebar {
-    background: var(--white);
+    background: var(--background);
     box-shadow: var(--shadow);
     padding: 24px 16px;
 }
@@ -8,7 +8,7 @@
 .logo-container {
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 25px;
     padding-left: 8px;
 }
 
@@ -16,72 +16,25 @@
     width: 24px;
     height: 24px;
     margin-right: 12px;
+    color: var(--accent);
 }
 
-.course-title {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--gray-dark);
-}
-
-.menu-section {
-    margin-bottom: 24px;
-}
-
-.section-title {
-    font-size: 14px;
-    color: var(--gray-medium);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 16px;
-    padding-left: 8px;
-}
-
-.btn {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-bottom: 4px;
-}
-
-.btn:hover {
-    background: var(--primary-light);
-    color: var(--primary);
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: var(--white);
-}
-
-.btn-primary:hover {
-    background: #1765CC;
-    box-shadow: var(--shadow-hover);
-}
-
-.icon {
-    font-size: 20px;
-    margin-right: 16px;
+.page-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
 }
 
 .user-card {
     display: flex;
     align-items: center;
     padding: 12px;
-    background: var(--gray-light);
+    background: var(--primary-light);
     border-radius: 8px;
     margin-bottom: 24px;
 }
 
-.avatar {
+.avatarHome {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -95,6 +48,58 @@
 }
 
 .user-info h4 {
-    font-size: 14px;
+    font-size: 1.1rem;
     margin-bottom: 4px;
+    color: var(--text-dark);
 }
+
+.badge{
+    color: var(--text-dark);
+}
+
+.menu-section {
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 1rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    padding-left: 8px;
+}
+
+.btnLateral {
+    display: flex;
+    align-items: center;
+    /* display: grid;
+    grid-template-columns: 1fr 4fr; */
+    width: 100%;
+    padding: 12px 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--primary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 4px;
+    color: var(--text-dark);
+}
+
+.btnLateral:hover {
+    background: var(--primary);
+    color: var(--text-dark);
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 16px;
+    color: var(--white);
+}
+
+.lateralCursoTitle{
+    
+}
+

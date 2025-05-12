@@ -6,6 +6,12 @@
     margin-bottom: 24px;
 }
 
+.progress-section h2{
+    color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 .progress-stats {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -19,23 +25,24 @@
     padding: 16px;
 }
 
-.stat-value {
-    font-size: 24px;
+.stat-valueHome {
+    font-size: 1.5rem;
     font-weight: 500;
     color: var(--primary);
     margin-bottom: 4px;
 }
 
-.stat-label {
-    font-size: 14px;
-    color: var(--gray-medium);
+.stat-labelHome {
+    font-size: 1rem;
+    color: var(--text-dark);
 }
 
-.progress-list {
+.progress-listHome {
     margin-top: 24px;
+    color: var(--text-dark);
 }
 
-.progress-item {
+.progress-itemHome {
     display: flex;
     align-items: center;
     padding: 12px 0;
@@ -43,12 +50,12 @@
 }
 
 
-.progress-item .material-icons {
+.progress-itemHome .material-icons {
     color: var(--secondary);
     margin-right: 12px;
 }
 
-.progress-text {
-    font-size: 14px;
+.progress-textHome {
+    font-size:1.1rem;
     flex: 1;
 }

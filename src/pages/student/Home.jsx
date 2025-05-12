@@ -55,14 +55,8 @@ const Home =  () =>{
         }
     };
 
-    const recentActivities = [
-        { id: 1, title: 'Cómo organizar mi bandeja de entrada' },
-        { id: 2, title: 'Configuración de filtros avanzados' },
-        { id: 3, title: 'Uso de etiquetas y categorías' }
-    ];
-
     if (loading) {
-        return <div className="loading">{t('viewHome.loadingCourses')}</div>;
+        return <div classN ame="loading">{t('viewHome.loadingCourses')}</div>;
     }
 
     return (
@@ -72,22 +66,21 @@ const Home =  () =>{
             
                 <div className="main-content">
                     {error && <div className="error-message">{error}</div>}
-                    <LanguageSwitcher/>
                     <div className="welcome-section">
-                        <h1>{t('viewHome.welcome')}, {user?.username || user?.name || t('viewHome.student')}</h1>
-                        <p className="subtitle">{t('viewHome.messageContinue')}</p>
+                        <h1 className="welcome-continue">{t('viewHome.welcome')}, {user?.username || user?.name || t('viewHome.student')}</h1>
+                        <p className="subtitle welcome-continue">{t('viewHome.messageContinue')}</p>
                     </div>
-                    
-                    <h2>{t('viewHome.mesaggeMy_courses')}</h2>
+                    <h2 className="welcome-misCursos">{t('viewHome.mesaggeMy_courses')}</h2>
                     <div className="courses-grid">
                         {enrolledCourses.length > 0 ? (
                             enrolledCourses.map(curso => (
                                 <TarjetaCursoHome
                                     key={curso.id}
                                     nombreCurso={curso.title}
-                                    onAction={() => handleSelectCourse(curso)}
                                     isInscrito={true}
                                     imagenPortada={curso.imageUrl}
+                                    instructorName={curso.instructorName}
+                                    onAction={() => handleSelectCourse(curso)}
                                 />
                             ))
                         ) : (
@@ -101,7 +94,7 @@ const Home =  () =>{
                         leccionesCompletadas={totalLessonsComplete || 0 }
                     />
                     
-                    <h2>{t('viewHome.availableCourses')}</h2>
+                    <h2 className="availableCourses">{t('viewHome.availableCourses')}</h2>
                     <div className="courses-grid">
                         {availableCourses.length > 0 ? (
                             availableCourses.map(curso => (

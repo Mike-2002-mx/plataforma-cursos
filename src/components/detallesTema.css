@@ -4,10 +4,10 @@
     grid-template-columns: 1fr auto auto;
     align-items: center;
     gap: 15px;
-    background-color: var(--white);
+    background-color: var(--background);
     border-left: 5px solid var(--primary);
     border-radius: 0 8px 8px 0;
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 15px;
     box-shadow: var(--shadow);
     transition: box-shadow 0.3s ease;
@@ -38,9 +38,10 @@
   }
   
   .btn__detalles {
-    background-color: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
+    background-color: var(--primary);
+    color: #FFF1F1;
+    /* border: 2px solid var(--primary); */
+    border: none;
     border-radius: 20px;
     padding: 8px 18px;
     font-weight: 600;
@@ -53,11 +54,11 @@
   
   .btn__detalles:hover {
     background-color: var(--primary);
-    color: var(--white);
+    color: var(--text-dark);
   }
   
   .contenedor__tema svg {
-    color: var(--primary);
+    color: var(--secondary);
     grid-row: 1 / span 2;
     grid-column: 3;
   }

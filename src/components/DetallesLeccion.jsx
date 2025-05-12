@@ -13,7 +13,7 @@ const DetallesLeccion = ({nombreLeccion, typeContent, isComplete, onAction}) =>{
                 return { icon: 'picture_as_pdf', label: 'PDF' };
             case 'VIDEO':
                 return { icon: 'videocam', label: 'Video' };
-            case 'IMAGE':
+            case 'IMAGEN':
                 return { icon: 'image', label: 'Imagen' };
             case 'AUDIO':
                 return { icon: 'audiotrack', label: 'Audio' };

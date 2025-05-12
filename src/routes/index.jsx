@@ -8,6 +8,9 @@ import { InstructorContentProvider } from "../context/InstructorContentContext";
 //Páginas publicas
 import Login from '../pages/auth/Login';
 import Register from "../pages/auth/Register";
+import Landing from "../pages/auth/Landing";
+
+//Páginas student
 import Home from "../pages/student/Home";
 import Prueba from "../Prueba";
 import VistaCurso from "../pages/student/VistaCurso";
@@ -27,14 +30,7 @@ const AppRoutes = () =>{
             {/*Rutas públicas*/}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/prueba" element={<Prueba/>}/>
-
-             {/* Rutas para estudiantes (con contexto de cursos y contenidos) */}
-            {/* <Route path="/home" element={<Home/>}/>
-            <Route path="/curso" element={<VistaCurso/>}/>
-            <Route path="/tema" element={<PaginaTema/>}/>
-            <Route path="/leccion" element={<PaginaLeccion/>}/> */}
-
+            <Route path="/" element={<Landing/>}/>
 
             <Route
                 path="/home"

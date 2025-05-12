@@ -16,8 +16,10 @@ export const CourseContentProvider = ({children}) => {
     const [lessonsProgress, setLessonsProgress] = useState([]);
     const [currentCourseTopics, setCurrentCourseTopics] = useState([]);
     const [currentTopicLessons, setCurrentTopicLessons] = useState([]);
+
     const [totalLessonsComplete, setTotalLessonsComplete] = useState(0);
     const [lessonsComplete, setLessonsComplete] = useState([]);
+    
     const [totalTopicsComplete, setTotalTopicsComplete] = useState(0);
     const [topicsComplete, setTopicsComplete] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -68,7 +70,7 @@ export const CourseContentProvider = ({children}) => {
         fetchTopicsProgress();
     }, [currentCourse, user]);
 
-
+    //Lecciones completadas
     useEffect(() => {
         const fetchLessonsCompleted = async () => {
             if(!user?.id || !user?.token) return;

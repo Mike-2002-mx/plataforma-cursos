@@ -1,4 +1,12 @@
 {
+    "landing": {
+        "title": "Nantzin artesanas altepetekas",
+        "login": "Ticcehuia",
+        "register": "Ticcuepaz",
+        "headline": "Ticchihua tlen nemiliztli digital tlen ichikawak",
+        "description": "Se xochitlapahtli iuan nemilistli techixmatisej tlen digital, timoiknelia.",
+        "languageQuestion": "Tlen tlahtolli tlen tichuika?"
+    },
     "loginPage":{
         "login": "Ticcehuia",
         "email": "Correo electrónico",

@@ -149,7 +149,7 @@ const RegisterForm = () => {
                     type="submit"
                     className="boton__registrar"
                 >
-                {t('registerUser.student')}
+                {t('registerUser.register')}
                 </button>
             </form>
         </div>

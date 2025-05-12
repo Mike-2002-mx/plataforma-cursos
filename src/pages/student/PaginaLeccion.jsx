@@ -39,7 +39,15 @@ const PaginaLeccion = () =>{
     console.log("Detalles de la lección actual", currentLesson);
 
     const handleContentViewed = () => {
-        console.log("✅ Contenido marcado como visto.");
+        
+        if(!currentLesson.completed){
+            setTimeout(() => {
+                completeLesson(user.id, currentLesson.idLesson);
+                console.log("Lección marcada como completada correctamente")
+            }, 1000)
+        } else{
+            console.log("La lección ya esta completada");
+        }
     };
 
     return(
@@ -52,7 +60,7 @@ const PaginaLeccion = () =>{
                     </div>
                     <div className="lesson-content">
                     <h2>Titulo lección: {currentLesson.titleLesson}</h2>
-                        <MediaRenderer url={"https://res.cloudinary.com/do0g84jlj/video/upload/v1746720641/pkosnqikdgyzk9qlq3s5.mp4" }  typeContent={'VIDEO'} onContentViewed={handleContentViewed}/>
+                        <MediaRenderer url={currentLesson.contentUrl}  typeContent={currentLesson.typeContent} onContentViewed={handleContentViewed}/>
                         <div className="lesson-description">
                             Description: {currentLesson.descriptionLesson}
                         </div>

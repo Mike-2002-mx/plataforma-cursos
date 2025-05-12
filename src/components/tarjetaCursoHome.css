@@ -1,73 +1,77 @@
-.course-card {
+.course-cardHome {
+    max-width: 300px;
     background: var(--white);
     border-radius: 12px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-    transition: all 0.2s;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 10px;
+    box-shadow: 0 4px 8px var(--text-light);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    margin: 15px;
 }
 
-.course-card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
+.course-cardHome:hover {
+    transform: translateY(-5px);
 }
 
-.course-header {
+.course-contentHome {
     display: flex;
-    justify-content: space-between;
-    flex-flow: column;
-    align-items: flex-start;
-    margin-bottom: 16px;
+    flex-direction: column;
 }
 
-.course-title {
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--gray-dark);
-    margin-bottom: 4px;
+.img-portadaCurso {
+    align-self: center;
+    width: 80%;
+    height: 180px;
+    object-fit: cover;
 }
 
-.course-author {
-    font-size: 14px;
-    color: var(--gray-medium);
-    margin-bottom: 12px;
+.course-contentHome > div {
+    padding: 15px 20px;
+    position: relative;
 }
 
-/* .course-meta {
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    color: var(--gray-medium);
-    margin-bottom: 16px;
+.course-progressHome {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 50%;
+    height: 15px;
+    background: var(--secondary);
 }
 
-.course-meta .material-icons {
-    font-size: 16px;
-    margin-right: 4px;
-} */
+.course-titleHome {
+    margin: 10px 0 5px;
+    color: var(--accent);
+    font-size: 1.6em;
+    min-height: 60px;
+}
+
+.course-authorHome {
+    color: var(--text-light);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
 
 .btn-continue {
     background: var(--primary);
-    color: var(--white);
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-weight: 700;
     border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: flex;
     align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    justify-content: center;
 }
 
 .btn-continue:hover {
-    background: #1765CC;
-    box-shadow: var(--shadow-hover);
+    background: var(--primary);
 }
 
-.btn-continue .material-icons {
-    font-size: 18px;
-    margin-left: 4px;
+.material-icons {
+    font-size: 1.2em;
 }

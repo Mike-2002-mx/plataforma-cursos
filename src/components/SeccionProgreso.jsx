@@ -13,26 +13,24 @@ const SeccionProgreso = ({temasCompletados, leccionesCompletadas, listaActividad
             <h2>{t('seccionProgreso.my_progress')}</h2>
                     <div className="progress-stats">
                         <div className="stat-card">
-                            <div className="stat-value">{temasCompletados}</div>
-                            <div className="stat-label">{t('seccionProgreso.topicCompletes')}</div>
+                            <div className="stat-valueHome">{temasCompletados}</div>
+                            <div className="stat-labelHome">{t('seccionProgreso.topicCompletes')}</div>
                         </div>
                         <div className="stat-card">
-                            <div className="stat-value">{leccionesCompletadas}</div>
-                            <div className="stat-label">{t('seccionProgreso.lessonsCompletes')}</div>
+                            <div className="stat-valueHome">{leccionesCompletadas}</div>
+                            <div className="stat-labelHome">{t('seccionProgreso.lessonsCompletes')}</div>
                         </div>
                     </div>
-                    <div className="progress-list">
-                        <div className="progress-list">
-                        <h3 style={{ fontSize: '16px', marginBottom: '16px', color: 'var(--gray-dark)' }}>
+                        <div className="progress-listHome">
+                        <h3 style={{ fontSize: '16px', marginBottom: '16px', color: 'var(--text-dark)' }}>
                             {t('seccionProgreso.lastActivitiesComplete')}
                         </h3>
                         {listaActividadesCompletadas.map((activity) => (
-                        <div key={activity.id} className="progress-item">
+                        <div key={activity.id} className="progress-itemHome">
                             <span className="material-icons">check_circle</span>
-                            <div className="progress-text">{activity.titleLesson}</div>
+                            <div className="progress-textHome">{activity.titleLesson}</div>
                         </div>
                         ))}
-                        </div>
                 </div>
         </div>
     </>

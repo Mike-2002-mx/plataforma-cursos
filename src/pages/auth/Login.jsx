@@ -62,7 +62,6 @@ const Login = () =>{
 
     return (
         <div className="contenedor__login">
-            <LanguageSwitcher/>
             <div className="contenedor__formulario__login">
                 <h2>{t('loginPage.login')}</h2>
                 
