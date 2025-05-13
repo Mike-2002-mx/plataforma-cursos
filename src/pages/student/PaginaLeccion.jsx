@@ -57,13 +57,14 @@ const PaginaLeccion = () =>{
                 <div className="main-content">
                     <div className="lesson-header">
                         <h1>Tema: {currentTopic.titleTopic} </h1>
+                        <h2>{currentTopic.descriptionTopic}</h2>
                     </div>
                     <div className="lesson-content">
-                    <h2>Titulo lección: {currentLesson.titleLesson}</h2>
-                        <MediaRenderer url={currentLesson.contentUrl}  typeContent={currentLesson.typeContent} onContentViewed={handleContentViewed}/>
-                        <div className="lesson-description">
-                            Description: {currentLesson.descriptionLesson}
-                        </div>
+                        <h2 className='lesson-title'>Titulo lección: {currentLesson.titleLesson}</h2>
+                            <MediaRenderer url={currentLesson.contentUrl}  typeContent={currentLesson.typeContent} onContentViewed={handleContentViewed}/>
+                            <div className="lesson-description">
+                                Description: {currentLesson.descriptionLesson}
+                            </div>
                     </div>
                 </div>
             </div>

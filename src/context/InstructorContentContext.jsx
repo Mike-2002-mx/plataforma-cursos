@@ -69,7 +69,7 @@ export const InstructorContentProvider = ({children}) =>{
                     }
                 });
                 const topicsCourse = response.data;
-                console.log(topicsCourse);
+                console.log("Temas del curso: ", topicsCourse);
                 const totalTopics = topicsCourse.length;
                 setTotalTemas(totalTopics);
                 setTemasCurso(topicsCourse);
@@ -90,20 +90,31 @@ export const InstructorContentProvider = ({children}) =>{
     };
 
     //Cargar lecciones cuando se selecciones un tema
-    // useEffect(() => {
-    //     const fetchLessonsTopic = async () => {
-    //         if(!temaActual || !user?.id || !user?.token) return;
+    useEffect(() => {
+        const fetchLessonsTopic = async () => {
+            if (!temaActual?.id || !user?.id || !user?.token) return;
 
-    //         setLoading(true);
-    //         try {
-    //             const response = await axios.ge
+            console.log("temaActual.id:", temaActual?.id);
+            setLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:8080/lessons/byTopicAndLanguage/${temaActual.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                        'Accept-Language': currentLanguage
+                    }
+                });
 
-    //         } catch (error) {
-                
-    //         }
-    //     }
-
-    // }, []);
+                console.log(response.data);
+                setLeccionesTema(response.data);
+            } catch (error) {
+                console.error('Error al obtener lecciones:', error);
+                setError('Error al cargar las lecciones del tema');
+            }finally{
+                setLoading(false);
+            }
+        };
+        fetchLessonsTopic();
+    }, [temaActual, user]);
 
 
     return(
@@ -115,6 +126,7 @@ export const InstructorContentProvider = ({children}) =>{
                 totalTemas,
                 selectTopic,
                 temaActual,
+                leccionesTema,
                 loading,
                 error
             }}
