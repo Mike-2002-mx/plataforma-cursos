@@ -8,9 +8,20 @@ const BarraLateralDashboard = ({}) => {
     const navigate = useNavigate();
     const {isAuthenticated, user, logout} = useAuth();
     const {
-        instructorCourses
+        instructorCourses,
+        selectCourse
     } = useInstructorCourses();
     
+    //Manejar la selección del curso inscrito
+    const handleSelectCourse = (curso) => {
+        console.log("Curso seleccionado: ", curso);
+        selectCourse(curso);
+        navigate('/vista-curso');
+    };
+
+    const navigateHome=() =>{
+        navigate('/dashboard')
+    }
 
     return (
         <>
@@ -30,11 +41,11 @@ const BarraLateralDashboard = ({}) => {
 
                 <div className="seccion-menu">
                     <h3 className="titulo-seccion">Opciones</h3>
-                    <button className="btn">
+                    <button className="btnDashboard" onClick={navigateHome} >
                         <span className="material-icons icon">home</span>
                         Inicio
                     </button>
-                    <button className="btn" onClick={logout}>
+                    <button className="btnDashboard" onClick={logout}>
                         <span className="material-icons icon">logout</span>
                         Cerrar sesión
                     </button>
@@ -44,8 +55,9 @@ const BarraLateralDashboard = ({}) => {
                     <h3 className="titulo-seccion">Mis cursos</h3>
                     {instructorCourses && instructorCourses.map(curso => (
                         <button
-                            className="btn"
-                            key={curso.id}>
+                            className="btnDashboard"
+                            key={curso.id}
+                            onClick={() => handleSelectCourse(curso)}>
                             <span className="material-icons icon">book</span>
                             {curso.title}
                         </button>

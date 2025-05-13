@@ -33,7 +33,7 @@
     position: absolute;
     top: -3px;
     left: 0;
-    width: 50%;
+    width: 100%;
     height: 15px;
     background: var(--secondary);
 }

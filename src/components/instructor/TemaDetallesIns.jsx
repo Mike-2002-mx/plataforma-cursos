@@ -1,13 +1,13 @@
 import './temaDetallesIns.css';
 
-const TemaDetallesIns = ({tituloTema, onAction}) =>{
+const TemaDetallesIns = ({tituloTema, onAction, totalLecciones}) =>{
+    
     return(
         <>
             <div className="topic-list">
-                <div className="topic-card">
-                    <div className="checkbox"></div>
+                <div onClick={onAction} className="topic-card">
                         <p className="topic-title">{tituloTema}</p>
-                        <span className="topic-lecciones">2 lecciones</span>
+                        <span className="topic-lecciones">{totalLecciones} {totalLecciones === 1 ? 'lección' : 'lecciones'}</span>
                         <button className="btn-crearTema" onClick={onAction}>
                             Revisar
                         </button>

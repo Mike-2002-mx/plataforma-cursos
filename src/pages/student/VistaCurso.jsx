@@ -11,6 +11,7 @@ import { useCourseContent } from "../../context/CourseContentContext";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../context/LanguajeContext";
 
+
 const VistaCurso = () => {
 
     const navigate = useNavigate();

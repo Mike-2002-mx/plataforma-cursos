@@ -21,11 +21,13 @@ export const InstructorCoursesProvider = ({children}) => {
 
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:8080/courses/byInstructor/${user.id}`, {
+            const response = await axios.get(`http://localhost:8080/courses/byInstructorAndLanguaje/${user.id}`, {
                 headers:{
-                    Authorization: `Bearer ${user.token}`
+                    Authorization: `Bearer ${user.token}`,
+                    'Accept-Language': currentLanguage
                 }
             });
+            console.log(response.data)
             return response.data;
         } catch (error) {
             console.error('Error al obtener cursos:', error.response?.data || error.message);

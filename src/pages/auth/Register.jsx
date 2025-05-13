@@ -99,7 +99,8 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="contenedor_registro">
+        <div className='fondo__registro'>
+            <div className="contenedor_registro">
                 <h2>{t('registerUser.enterData')}</h2>
                 {message && <p>{message}</p>}
                 <form onSubmit={handleSubmit} className="formulario__registro">
@@ -133,25 +134,27 @@ const RegisterForm = () => {
                         required
                     />
 
-                <select
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                    className="seleccion__registro"
-                    required
-                >
-                    <option value="">{t('registerUser.selectRole')}</option>
-                    <option value="INSTRUCTOR">{t('registerUser.instructor')}</option>
-                    <option value="STUDENT">{t('registerUser.student')}</option>
-                </select>
+                        <select
+                            name="role"
+                            value={formData.role}
+                            onChange={handleChange}
+                            className="seleccion__registro"
+                            required
+                        >
+                            <option value="">{t('registerUser.selectRole')}</option>
+                            <option value="INSTRUCTOR">{t('registerUser.instructor')}</option>
+                            <option value="STUDENT">{t('registerUser.student')}</option>
+                        </select>
 
-                <button
-                    type="submit"
-                    className="boton__registrar"
-                >
-                {t('registerUser.register')}
-                </button>
+                        <button
+                            type="submit"
+                            className="boton__registrar"
+                        >
+                        {t('registerUser.register')}
+                        </button>
             </form>
+            
+        </div>
         </div>
     );
 

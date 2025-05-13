@@ -46,29 +46,28 @@ const Dashboard = () =>{
                     <div className="welcome-section">
                         <h1>Bienvenida, {user?.username || user?.name || 'Estudiante'}</h1>
                         <p className="subtitle">Estos son tus cursos actuales</p>
-
-                        <div className="contenedor-cursos">
-                            {instructorCourses.map(curso => (
-                                <TarjetaCursoDashboard
-                                    key={curso.id}
-                                    imagenPortada={curso.imageUrl}
-                                    cursoTitulo={curso.title}
-                                    totalAlumnos={10}
-                                    totalTemas={10}
-                                    onAction={() => handleSelectCourse(curso)}
-                                />
-                            ))}
-                        </div>
-                        <button 
+                    </div>
+                    <button 
                         onClick={navigateCreateCuourse}
                         className="btn-crearCurso">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
                             </svg>
                             Crear Curso
-                        </button>
-
-                        </div>
+                    </button>
+                    <div className="contenedor-cursos">
+                            {instructorCourses.map(curso => (
+                                <TarjetaCursoDashboard
+                                    key={curso.id}
+                                    imagenPortada={curso.imageUrl}
+                                    cursoTitulo={curso.title}
+                                    totalAlumnos={curso.studentsEnrollments}
+                                    totalTemas={curso.totalTopics}
+                                    totalLecciones={curso.totalLessons}
+                                    onAction={() => handleSelectCourse(curso)}
+                                />
+                            ))}
+                        </div>                        
                 </div>
             </div>
         </>

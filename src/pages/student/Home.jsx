@@ -55,8 +55,10 @@ const Home =  () =>{
         }
     };
 
+    
+
     if (loading) {
-        return <div classN ame="loading">{t('viewHome.loadingCourses')}</div>;
+        return <div className="loading">{t('viewHome.loadingCourses')}</div>;
     }
 
     return (
