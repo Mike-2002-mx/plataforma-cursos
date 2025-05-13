@@ -13,9 +13,9 @@ const TarjetaCursoHome = ( {imagenPortada, nombreCurso, isInscrito, instructorNa
                             alt={`Portada de ${nombreCurso}`}
                     />
                     <div>
-                        {isInscrito && (
+                        {/* {isInscrito && (
                             <div className='course-progressHome'/>
-                        )}
+                        )} */}
                         <h3 className="course-titleHome">{nombreCurso}</h3>
                         <p className="course-authorHome">{t('tarjetaCursoHome.by')} {instructorName}</p>
                         <button onClick={onAction} className="btn-continue">

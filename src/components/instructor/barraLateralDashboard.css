@@ -1,5 +1,5 @@
 .barra-lateral {
-    background: var(--background);
+    background: var(--white);
     box-shadow: var(--shadow);
     padding: 24px 16px;
 }
@@ -15,20 +15,19 @@
     width: 24px;
     height: 24px;
     margin-right: 12px;
-    color: var(--accent);
 }
 
 .titulo-curso {
     font-size: 20px;
     font-weight: 500;
-    color: var(--accent);
+    color: var(--gray-dark);
 }
 
 .tarjeta-usuario {
     display: flex;
     align-items: center;
     padding: 12px;
-    background: var(--primary-light);
+    background: var(--gray-light);
     border-radius: 8px;
     margin-bottom: 24px;
 }
@@ -49,7 +48,6 @@
 .info-usuario h4 {
     font-size: 14px;
     margin-bottom: 4px;
-    color: var(--text-dark);
 }
 
 .seccion-menu {
@@ -57,41 +55,34 @@
 }
 
 .titulo-seccion{
-    font-size: 1rem;
-    color: var(--text-dark);
+    font-size: 14px;
+    color: var(--gray-medium);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 16px;
     padding-left: 8px;
 }
 
-.btnDashboard {
+.btn {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 12px 10px;
+    padding: 12px 16px;
     border-radius: 8px;
     border: none;
-    background: var(--primary);
-    font-size: 1rem;
+    background: transparent;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
     margin-bottom: 4px;
-    color: var(--text-dark);
 }
 
-.btnDashboard:hover {
-    background: var(--primary);
-    color: var(--text-dark);
+.btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
 }
 
-.icon {
-    font-size: 20px;
-    margin-right: 16px;
-    color: var(--text-dark);
-}
-/* 
 .btn-primary {
     background: var(--primary);
     color: var(--white);
@@ -100,4 +91,4 @@
 .btn-primary:hover {
     background: #1765CC;
     box-shadow: var(--shadow-hover);
-} */
+}

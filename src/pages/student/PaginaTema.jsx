@@ -77,71 +77,33 @@ const PaginaTema = () => {
                 
                 <div className="main-content">
                     {error && <div className="error-message">{error}</div>}
+                    
                     {currentTopic && (
                         <div className="lesson-header">
                             <h1>Tema: {currentTopic.titleTopic}</h1>
                             <h2>{currentTopic.descriptionTopic}</h2>
-                            {/* <div className="progress-container">
+                            <div className="progress-container">
                                 <div 
                                     className="progress-bar" 
                                     // style={{ width: `${topicProgress}%` }}
                                 ></div>
-                            </div> */}
+                            </div>
                             {/* <p className="progress-text">{topicProgress}% completado</p> */}
-                            {/* <p className="progress-text">60% {t('paginaTema.completed')}</p> */}
+                            <p className="progress-text">60% {t('paginaTema.completed')}</p>
                         </div>
                     )}
                     
                     <div className="lesson-content">
                         <h2>{t('paginaTema.lessonContent')}</h2>
-
-                        <h2 className="tipoContenido">Videos</h2>
-                        {currentTopicLessons.filter(l => l.typeContent === 'VIDEO').length > 0 ? (
-                            currentTopicLessons
-                            .filter(l => l.typeContent === 'VIDEO')
-                            .map(leccion => (
-                                <DetallesLeccion
-                                key={leccion.id}
-                                nombreLeccion={leccion.titleLesson}
-                                isComplete={leccion.completed}
-                                typeContent={leccion.typeContent}
-                                onAction={() => handleSelectLesson(leccion)}
-                                />
-                            ))
-                        ) : (
-                            <p>{t('paginaTema.noLessons')}</p>
-                        )}
-
-                        {/* Infografías (PDFs) */}
-                        <h2 className="tipoContenido">Infografías</h2>
-                        {currentTopicLessons.filter(l => l.typeContent === 'PDF').length > 0 ? (
-                            currentTopicLessons
-                            .filter(l => l.typeContent === 'PDF')
-                            .map(leccion => (
-                                <DetallesLeccion
-                                key={leccion.id}
-                                nombreLeccion={leccion.titleLesson}
-                                isComplete={leccion.completed}
-                                typeContent={leccion.typeContent}
-                                onAction={() => handleSelectLesson(leccion)}
-                                />
-                            ))
-                        ) : (
-                            <p>{t('paginaTema.noLessons')}</p>
-                        )}
-
-                        <h2 className="tipoContenido">Audios</h2>
-                        {currentTopicLessons.filter(l => l.typeContent === 'AUDIO').length > 0 ? (
-                            currentTopicLessons
-                            .filter(l => l.typeContent === 'AUDIO')
-                            .map(leccion => (
-                                <DetallesLeccion
-                                key={leccion.id}
-                                nombreLeccion={leccion.titleLesson}
-                                isComplete={leccion.completed}
-                                typeContent={leccion.typeContent}
-                                onAction={() => handleSelectLesson(leccion)}
-                                />
+                        {currentTopicLessons.length > 0 ? (
+                            currentTopicLessons.map(leccion => (
+                                <DetallesLeccion 
+                                    key={leccion.id}
+                                    nombreLeccion={leccion.titleLesson}
+                                    isComplete={leccion.completed}
+                                    typeContent={leccion.typeContent}
+                                    onAction={() => handleSelectLesson(leccion)}
+                                /> 
                             ))
                         ) : (
                             <p>{t('paginaTema.noLessons')}</p>

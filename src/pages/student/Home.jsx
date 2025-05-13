@@ -55,10 +55,8 @@ const Home =  () =>{
         }
     };
 
-    
-
     if (loading) {
-        return <div className="loading">{t('viewHome.loadingCourses')}</div>;
+        return <div classN ame="loading">{t('viewHome.loadingCourses')}</div>;
     }
 
     return (

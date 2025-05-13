@@ -61,51 +61,49 @@ const Login = () =>{
     }
 
     return (
-        <>
-            <div className="contenedor__login">
-                <div className="contenedor__formulario__login">
-                    <h2>{t('loginPage.login')}</h2>
-                    
-                    {error && <div className="alerta alerta__error">{error}</div>}
-                    
-                    <form onSubmit={handleSubmit}>
-                    <div className="grupo__formulario">
-                        <label htmlFor="email">{t('loginPage.email')}</label>
-                        <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        />
-                    </div>
-                    
-                    <div className="grupo__formulario">
-                        <label htmlFor="password">{t('loginPage.password')}</label>
-                        <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        />
-                    </div>
-                    
-                    <button 
-                        type="submit" 
-                        className="boton__iniciar__sesion"
-                        disabled={loading}
-                    >
-                        {loading ? t('loading') : t('loginPage.login')}
-                    </button>
-                    </form>
-                    
-                    <p className="link__registro">
-                    {t('loginPage.question')} <Link to="/register">{t('loginPage.register')}</Link>
-                    </p>
+        <div className="contenedor__login">
+            <div className="contenedor__formulario__login">
+                <h2>{t('loginPage.login')}</h2>
+                
+                {error && <div className="alerta alerta__error">{error}</div>}
+                
+                <form onSubmit={handleSubmit}>
+                <div className="grupo__formulario">
+                    <label htmlFor="email">{t('loginPage.email')}</label>
+                    <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    />
                 </div>
+                
+                <div className="grupo__formulario">
+                    <label htmlFor="password">{t('loginPage.password')}</label>
+                    <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    />
+                </div>
+                
+                <button 
+                    type="submit" 
+                    className="boton__iniciar__sesion"
+                    disabled={loading}
+                >
+                    {loading ? t('loading') : t('loginPage.login')}
+                </button>
+                </form>
+                
+                <p className="link__registro">
+                {t('loginPage.question')} <Link to="/register">{t('loginPage.register')}</Link>
+                </p>
             </div>
-        </>
+        </div>
     );
 };
 

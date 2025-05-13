@@ -10,7 +10,7 @@ const DetallesLeccion = ({nombreLeccion, typeContent, isComplete, onAction}) =>{
     const getIconData = (typeContent) => {
         switch (typeContent) {
             case 'PDF':
-                return { icon: 'picture_as_pdf', label: 'Infografía' };
+                return { icon: 'picture_as_pdf', label: 'PDF' };
             case 'VIDEO':
                 return { icon: 'videocam', label: 'Video' };
             case 'IMAGEN':
@@ -27,7 +27,7 @@ const DetallesLeccion = ({nombreLeccion, typeContent, isComplete, onAction}) =>{
     return(
         <>
             <div className="tasks-list">
-                    <div className="task-item" onClick={onAction}>
+                    <div className="task-item">
                         {isComplete ? (
                             <div className="task-checkbox checked"></div>
                         ): (
@@ -35,6 +35,17 @@ const DetallesLeccion = ({nombreLeccion, typeContent, isComplete, onAction}) =>{
                         )}
                         <div className="task-content">
                             <h3 className="task-title">{nombreLeccion}</h3>
+                            {/* {isVideo ? (
+                                <div className="task-meta">
+                                <span className="material-icons">play_circle</span>
+                                <span>Video</span>
+                                </div>
+                            ):(
+                                <div className="task-meta">
+                                    <span className="material-icons">article</span>
+                                    <span>Teoría</span>
+                                </div>
+                            )} */}
                             <div className="task-meta">
                                     <span className="material-icons">{icon}</span>
                                     <span>{label}</span>

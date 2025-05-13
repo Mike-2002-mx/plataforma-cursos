@@ -30,8 +30,6 @@ h1 {
 }
 
 .btn-crearCurso {
-    margin-top: 20px;
-    margin-bottom: 20px;
     background-color: var(--primary);
     color: white;
     border: none;

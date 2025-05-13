@@ -73,11 +73,12 @@
 .btnLateral {
     display: flex;
     align-items: center;
+    /* display: grid;
+    grid-template-columns: 1fr 4fr; */
     width: 100%;
     padding: 12px 10px;
     border-radius: 8px;
     border: none;
-    border-radius: 20px;
     background: var(--primary);
     font-size: 1rem;
     font-weight: 500;
@@ -95,7 +96,7 @@
 .icon {
     font-size: 20px;
     margin-right: 16px;
-    color: var(--text-dark);
+    color: var(--white);
 }
 
 .lateralCursoTitle{

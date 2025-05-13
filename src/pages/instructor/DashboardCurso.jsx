@@ -71,18 +71,12 @@ const DashboardCurso = () => {
                         <div className="section-header">
                             <h2>Alumnos inscritos</h2>
                         </div>
-
-                        <div className="students-grid">
-                            {estudiantesInscritos.map(estudiante =>(
-                                <TarjetaAlumno
-                                    key={estudiante.idUser}
-                                    nombreAlumno={estudiante.userName}
-                                    
-                                />
-                            ))}
-                        </div>
-
-
+                        {estudiantesInscritos.map(estudiante =>(
+                            <TarjetaAlumno
+                                key={estudiante.idUser}
+                                nombreAlumno={estudiante.userName}
+                            />
+                        ))}
                     </div>
                     <button 
                         className="btn-crearTema"
@@ -102,7 +96,6 @@ const DashboardCurso = () => {
                                 <TemaDetallesIns
                                     key={tema.id} 
                                     tituloTema={tema.title}
-                                    totalLecciones={tema.totalLessons}
                                     onAction={() => handleSelectTopic(tema)} 
                                 />
                             ))

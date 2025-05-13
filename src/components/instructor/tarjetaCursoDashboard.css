@@ -1,6 +1,5 @@
 .card-2 {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    display: flex;
     background: var(--white);
     box-shadow: var(--shadow);
     border-radius: 12px;
@@ -12,11 +11,9 @@
   .card-2:hover {
     box-shadow: var(--shadow-hover);
   }
-  
   .thumb {
     width: 200px;
     object-fit: cover;
-    align-self: center;
   }
   .info {
     padding: 1rem;
@@ -24,18 +21,15 @@
     flex-direction: column;
     justify-content: space-between;
   }
-
   .info h4 {
     margin: 0;
     font-size: 1.3rem;
-    color: var(--text-dark);
+    color: var(--gray-dark);
   }
-
   .info p {
-    color: var(--text-light);
+    color: var(--gray-medium);
     margin: 0.5rem 0;
   }
-  
   .btn-review {
     background: var(--primary);
     color: var(--white);
