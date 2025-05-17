@@ -60,46 +60,25 @@ const MediaRenderer = ({url, typeContent, onContentViewed }) =>{
             setLoading(false);
         });
 
+        player.on('ended', () => {
+            onContentViewed();
+        });
+
     }
 
-    // /**Lógica para marcar la lección como vista */
-    // // Esto es para detectar si el componente esta visible o no
-    // useEffect(() => {
-    //     const observer = new IntersectionObserver(
-    //     ([entry]) => {
-    //         setIsVisible(entry.isIntersecting);
-    //     },
-    //     { threshold: 0.5 } // Al menos 50% visible
-    //     );
-
-    //     if (containerRef.current) {
-    //     observer.observe(containerRef.current);
-    //     }
-
-    //     return () => observer.disconnect();
-    // }, []);
-
-    // Detectar si la pestaña esta activa o no
-    useEffect(() => {
-        const handleVisibilityChange = () => {
-        setTabActive(!document.hidden);
-        };
-
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-    }, []);
 
     // // Contar tiempo activo
     useEffect(() => {
+        let timer;
 
-        const timer = setTimeout(() => {
-            onContentViewed();
-        }, 30000);
-    
-        return () => clearTimeout(timer); 
+        if (typeContent !== 'VIDEO') {
+            timer = setTimeout(() => {
+                onContentViewed();
+            }, 5000);
+        }
 
-    }, [onContentViewed]);
-
+        return () => clearTimeout(timer);
+    }, []);
 
     // Verificar si la URL existe
     useEffect(() => {

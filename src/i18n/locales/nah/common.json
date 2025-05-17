@@ -63,5 +63,11 @@
         "completed": "tichiwa",
         "lessonContent": "Tlen tlamachtilli",
         "noLessons": "Inin tematl axkan axkan tlamachtilli tlen techmoneki."
+    },
+
+        "dashboard":{
+        "welcome": "Ximopanoltih",
+        "my_courses": "Ni tlamachtili tlen tijpixtok",
+        "createCourse": "Crear Curso"
     }
 }

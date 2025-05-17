@@ -6,7 +6,6 @@ import { useCourseContent } from '../../context/CourseContentContext';
 import './paginaLeccion.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import AudioPlayer from '../../components/AudioPlayer';
 import MediaRenderer from '../../components/MediaRenderer';
 
 const PaginaLeccion = () =>{
@@ -41,13 +40,16 @@ const PaginaLeccion = () =>{
     const handleContentViewed = () => {
         
         if(!currentLesson.completed){
-            setTimeout(() => {
-                completeLesson(user.id, currentLesson.idLesson);
-                console.log("Lección marcada como completada correctamente")
-            }, 1000)
-        } else{
-            console.log("La lección ya esta completada");
+            setTimeout(async () => {
+            const result = await completeLesson(user.id, currentLesson.idLesson);
+            if (result.success) {
+                console.log("Lección marcada como completada correctamente");
+            } else {
+                console.log("No se pudo completar la lección");
+            }
+            }, 1000);
         }
+        
     };
 
     return(
@@ -61,7 +63,9 @@ const PaginaLeccion = () =>{
                     </div>
                     <div className="lesson-content">
                         <h2 className='lesson-title'>Titulo lección: {currentLesson.titleLesson}</h2>
-                            <MediaRenderer url={currentLesson.contentUrl}  typeContent={currentLesson.typeContent} onContentViewed={handleContentViewed}/>
+                            <div className='mediaRender'>
+                                <MediaRenderer url={currentLesson.contentUrl}  typeContent={currentLesson.typeContent} onContentViewed={handleContentViewed}/>
+                            </div>
                             <div className="lesson-description">
                                 Description: {currentLesson.descriptionLesson}
                             </div>

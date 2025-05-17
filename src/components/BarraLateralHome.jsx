@@ -39,15 +39,15 @@ const BarraLateralHome = ({}) =>{
     };
 
     const naviteHome = () =>{
-        navigate('/home');
+        navigate('/');
     }
 
     return (
         <>
             <div className="sidebar">
                 <div className="logo-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5186/5186387.png" alt="Logo" className="logo"/>
-                    <h1 className="page-title">{t('landing.title')}</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                    <h1 className="page-title">Momachtia TIC</h1>
                 </div>
                 
                 <div className="user-card">

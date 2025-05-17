@@ -65,6 +65,7 @@ const CrearLeccion = () =>{
                 const percentCompleted = Math.round(
                     (progressEvent.loaded * 100) / progressEvent.total
                 );
+                setUploadProgress(percentCompleted);
                 console.log(`Progreso de carga: ${percentCompleted}%`);
                 },
             });
@@ -153,6 +154,7 @@ const CrearLeccion = () =>{
                 setDescriptionNahuatl('');
                 setTypeContent('');
                 setFile(null);
+                
             }
 
         } catch (error) {

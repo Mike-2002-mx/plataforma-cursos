@@ -19,7 +19,7 @@
 
 .img-portadaCurso {
     align-self: center;
-    width: 80%;
+    width: 100%;
     height: 180px;
     object-fit: cover;
 }

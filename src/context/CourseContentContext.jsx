@@ -97,32 +97,33 @@ export const CourseContentProvider = ({children}) => {
         fetchLessonsCompleted();
     },[user])
 
-    // //
-    // useEffect(() => {
-    //     const fetchTopicsCompleted = async () => {
-    //         if(!user?.id || !user?.token) return;
+    //Cargar temas completados del backend
+    useEffect(() => {
+        const fetchTopicsCompleted = async () => {
+            if(!user?.id || !user?.token) return;
 
-    //         try {
-    //             const response = await axios.get(`http://localhost:8080/progressTopic/byUser/${user.id}`, {
-    //                 headers: {
-    //                     Authorization: `Bearer ${user.token}`
-    //                 }
-    //             });
-    //             console.log(response.data);
-    //             const temasCompletados = response.data;
-    //             const total = Array.isArray(response.data) ? response.data.length : 0;
-    //             setLessonsComplete(temasCompletados);
-    //             setTotalTopicsComplete(total);
-    //         } catch (error) {
-    //             console.error("Error al obtener temas: ", error);
-    //             setError("Error al cargar los temas del curso");
-    //         }finally{
-    //             setLoading(false);
-    //         }
-    //     }
+            try {
+                const response = await axios.get(`http://localhost:8080/progressTopic/byUserAndLanguage/${user.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                        'Accept-Language': currentLanguage
+                    }
+                });
+                console.log(response.data);
+                const temasCompletados = response.data;
+                const total = Array.isArray(response.data) ? response.data.length : 0;
+                setTopicsComplete(temasCompletados);
+                setTotalTopicsComplete(total);
+            } catch (error) {
+                console.error("Error al obtener temas: ", error);
+                setError("Error al cargar los temas del curso");
+            }finally{
+                setLoading(false);
+            }
+        }
 
-    //     fetchTopicsCompleted();
-    // },[user])
+        fetchTopicsCompleted();
+    },[user])
 
     //Cargar lecciones cuando se selecciona un tema
     useEffect(() => {
@@ -220,11 +221,11 @@ export const CourseContentProvider = ({children}) => {
                 localStorage.setItem('leccionActual', JSON.stringify(updatedLesson));
             }
 
-            return {succes: true, data: response.data}
+            return {success: true, data: response.data}
         } catch (error) {
             console.error("Error al marcar lección como completada: ", error);
             setError('Error al actualizar progreso');
-            return {succes: false};
+            return {success: false};
         }
     };
 
@@ -243,31 +244,32 @@ export const CourseContentProvider = ({children}) => {
                 }
             );
             console.log(response.data);
-            // Actualizar estado local
-            // setLessonsProgress(prev => 
-            //     prev.map(lesson => 
-            //     lesson.id === lessonId ? { ...lesson, completed: true } : lesson
-            //     )
-            // );
-            //  // Actualizar lecciones del tema actual
-            // setCurrentTopicLessons(prev => 
-            //     prev.map(lesson => 
-            //     lesson.idLesson === lessonId ? { ...lesson, completed: true } : lesson
-            //     )
-            // );
+            // Actualizar estado local de topicsProgress
+        setTopicsProgress(prev => 
+            prev.map(topic => 
+                topic.idTopic === topicId ? { ...topic, completed: true } : topic
+            )
+        );
 
-            //  // Si la lección actual es la que se completó, actualizarla
-            // if (currentLesson?.idLesson === lessonId) {
-            //     const updatedLesson = { ...currentLesson, completed: true };
-            //     setCurrentLesson(updatedLesson);
-            //     localStorage.setItem('leccionActual', JSON.stringify(updatedLesson));
-            // }
+        // Actualizar temas del curso actual
+        setCurrentCourseTopics(prev => 
+            prev.map(topic => 
+                topic.idTopic === topicId ? { ...topic, completed: true } : topic
+            )
+        );
 
-            return {succes: true, data: response.data}
+        // Si el tema actual es el que se completó, actualizarlo
+        if (currentTopic?.idTopic === topicId) {
+            const updatedTopic = { ...currentTopic, completed: true };
+            setCurrentTopic(updatedTopic);
+            localStorage.setItem('temaActual', JSON.stringify(updatedTopic));
+        }
+
+            return {success: true, data: response.data}
         } catch (error) {
             console.error("Error al marcar lección como completada: ", error);
             setError('Error al actualizar progreso');
-            return {succes: false};
+            return {success: false};
         }
     };
 

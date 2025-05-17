@@ -63,5 +63,11 @@
         "completed": "completado",
         "lessonContent": "Contenido de la lección",
         "noLessons": "Este tema aún no tiene lecciones disponibles."
+    },
+    
+    "dashboard":{
+        "welcome": "Bienvenida",
+        "my_courses": "Estos son tus cursos actuales",
+        "createCourse": "Crear Curso"
     }
 }

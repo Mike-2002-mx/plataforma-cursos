@@ -21,7 +21,8 @@ const Landing = () =>{
             <div className="contenedorTotal">
                 <div className="contenedorDatos">
                     <nav>
-                        <span>{t('landing.title')}</span>
+                        {/* <img src="public/Logo.png" alt="Logo" className="logo"/> */}
+                        <span>Momachtia TIC</span>
                         <div>
                             <button onClick={navegarInicioSesion} className="btn-landing">
                                 {t('landing.login')}

@@ -20,15 +20,15 @@ const BarraLateralDashboard = ({}) => {
     };
 
     const navigateHome=() =>{
-        navigate('/dashboard')
+        navigate('/')
     }
 
     return (
         <>
             <div className="barra-lateral">
                 <div className="contenedor-logo">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5186/5186387.png" alt="Logo" className="logo"></img>
-                    <h1 className="titulo-curso">Página de inicio</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"></img>
+                    <h1 className="titulo-curso">Momachtia TIC</h1>
                 </div>
 
                 <div className="tarjeta-usuario">
