@@ -76,9 +76,10 @@ export const CourseContentProvider = ({children}) => {
             if(!user?.id || !user?.token) return;
 
             try {
-                const response = await axios.get(`http://localhost:8080/progressLesson/lessonsCompletedByUser/${user.id}`, {
+                const response = await axios.get(`http://localhost:8080/progressLesson/lessonsCompletedByUserAndLanguage/${user.id}`, {
                     headers: {
-                        Authorization: `Bearer ${user.token}`
+                        Authorization: `Bearer ${user.token}`,
+                        'Accept-Language': currentLanguage
                     }
                 });
                 console.log(response.data);

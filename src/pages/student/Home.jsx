@@ -55,8 +55,6 @@ const Home =  () =>{
         }
     };
 
-    
-
     if (loading) {
         return <div className="loading">{t('viewHome.loadingCourses')}</div>;
     }
@@ -92,7 +90,7 @@ const Home =  () =>{
 
                     <SeccionProgreso 
                         temasCompletados={totalTopicsComplete || 0} 
-                        listaActividadesCompletadas={lessonsComplete}
+                        listaLeccionesCompletadas ={lessonsComplete}
                         leccionesCompletadas={totalLessonsComplete || 0 }
                     />
                     
@@ -104,6 +102,7 @@ const Home =  () =>{
                                     key={curso.id} 
                                     nombreCurso={curso.title}
                                     isInscrito={false}
+                                    instructorName={curso.instructorName}
                                     imagenPortada={curso.imageUrl}
                                     onAction={() => handleEnrollCourse(curso)}
                                 />

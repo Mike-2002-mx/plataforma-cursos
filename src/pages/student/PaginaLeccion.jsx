@@ -67,7 +67,7 @@ const PaginaLeccion = () =>{
                                 <MediaRenderer url={currentLesson.contentUrl}  typeContent={currentLesson.typeContent} onContentViewed={handleContentViewed}/>
                             </div>
                             <div className="lesson-description">
-                                Description: {currentLesson.descriptionLesson}
+                                Descripción: {currentLesson.descriptionLesson}
                             </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import BarraLateralDashboard from '../../components/instructor/BarraLateralDashboard';
 
 const CrearCurso = () =>{
 
@@ -119,67 +120,76 @@ const CrearCurso = () =>{
     };
 
     return (
-        <form className="course-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-            <label htmlFor="title">Título del curso</label>
-            <input
-                type="text"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            </div>
+        <div className='dashboard'>
+            <BarraLateralDashboard/>
+            <div className='main-content'>
+                <form className="course-form" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                    <label htmlFor="title">Título del curso</label>
+                    <input
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    </div>
+                    
+                    <div className="form-group">
+                    <label htmlFor="titleNahuatl">Título en Náhuatl</label>
+                    <input
+                        type="text"
+                        id="titleNahuatl"
+                        value={titleNahuatl}
+                        onChange={(e) => setTitleNahuatl(e.target.value)}
+                    />
+                    </div>
+                    
+                    <div className="form-group">
+                    <label htmlFor="description">Descripción del curso</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    </div>
+                    
+                    <div className="form-group">
+                    <label htmlFor="descriptionNahuatl">Descripción del curso en Náhuatl</label>
+                    <textarea
+                        id="descriptionNahuatl"
+                        value={descriptionNahuatl}
+                        onChange={(e) => setDescriptionNahuatl(e.target.value)}
+                    />
+                    </div>
+                    
+                    <div className="form-group">
+                    <label htmlFor="image">Imagen de portada</label>
+                    <input
+                        type="file"
+                        id="image"
+                        onChange={(e)=>uploadImage(e)}
+                    />
+                    {loading ? (
+                    <h3>Loading...</h3>
+                    ) : (
+                    <img src={image} alt="imagen subida"/>
+                    )}
+                    </div>
             
-            <div className="form-group">
-            <label htmlFor="titleNahuatl">Título en Náhuatl</label>
-            <input
-                type="text"
-                id="titleNahuatl"
-                value={titleNahuatl}
-                onChange={(e) => setTitleNahuatl(e.target.value)}
-            />
+                    <button 
+                        type="submit" 
+                        className="submit-button"
+                        disabled={loading}
+                    >
+                        {loading ? 'Creando...' : 'Crear Curso'}
+                    </button>
+                </form>
             </div>
-            
-            <div className="form-group">
-            <label htmlFor="description">Descripción del curso</label>
-            <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-            </div>
-            
-            <div className="form-group">
-            <label htmlFor="descriptionNahuatl">Descripción del curso en Náhuatl</label>
-            <textarea
-                id="descriptionNahuatl"
-                value={descriptionNahuatl}
-                onChange={(e) => setDescriptionNahuatl(e.target.value)}
-            />
-            </div>
-            
-            <div className="form-group">
-            <label htmlFor="image">Imagen de portada</label>
-            <input
-                type="file"
-                id="image"
-                onChange={(e)=>uploadImage(e)}
-            />
-            {loading ? (
-            <h3>Loading...</h3>
-            ) : (
-            <img src={image} alt="imagen subida"/>
-            )}
-            </div>
-    
-            <button 
-                type="submit" 
-                className="submit-button"
-                disabled={loading}
-            >
-                {loading ? 'Creando...' : 'Crear Curso'}
-            </button>
-        </form>
+
+        </div>
+
+
+        
         );
 };
 

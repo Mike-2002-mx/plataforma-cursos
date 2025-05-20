@@ -32,7 +32,7 @@ const BarraLateralDashboard = ({}) => {
                 </div>
 
                 <div className="tarjeta-usuario">
-                    <div className="avatar">{'Y'}</div>
+                    <div className="avatar">{'M'}</div>
                     <div className="info-usuario">
                         <h4>{user?.username}</h4>
                         <span className="badge">Instructor</span>

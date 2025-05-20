@@ -68,7 +68,6 @@ const BarraLateralHome = ({}) =>{
                         <span className="material-icons icon">logout</span>
                         {t('sidebar.logout')}
                     </button>
-                    
                 </div>
                 <div className="menu-section">
                     <h3 className="section-title">{t('sidebar.my_courses')}</h3>

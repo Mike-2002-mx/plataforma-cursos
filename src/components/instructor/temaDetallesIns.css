@@ -30,12 +30,12 @@
 
 .topic-title {
     flex: 1;
-    font-size: 14px;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
 .topic-lecciones {
-    font-size: 12px;
+    font-size: 1rem;
     color: var(--gray-medium);
     margin-left: 16px;
 }

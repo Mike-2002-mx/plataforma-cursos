@@ -49,7 +49,6 @@ const DashboardCurso = () => {
             <div className="dashboard">
                 <BarraLateralDashboard/>
                 <div className="main-content">
-                    <h2>Información del Curso</h2>
                     <section className="section">
                         <h2 className="course-title">{currentCourse.title}</h2>
                         <p className="course-description">
@@ -66,7 +65,6 @@ const DashboardCurso = () => {
                             </div>
                         </div>
                     </section>
-                    <h2>Dashboard del Curso</h2>
                     <div className="section">
                         <div className="section-header">
                             <h2>Alumnos inscritos</h2>

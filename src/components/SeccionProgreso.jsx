@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next';
 import './seccionProgreso.css';
 
-const SeccionProgreso = ({temasCompletados, leccionesCompletadas, listaActividadesCompletadas}) =>{
+const SeccionProgreso = ({temasCompletados, leccionesCompletadas, listaLeccionesCompletadas}) =>{
 
     const {t} = useTranslation();
 
@@ -25,10 +25,11 @@ const SeccionProgreso = ({temasCompletados, leccionesCompletadas, listaActividad
                         <h3 style={{ fontSize: '16px', marginBottom: '16px', color: 'var(--text-dark)' }}>
                             {t('seccionProgreso.lastActivitiesComplete')}
                         </h3>
-                        {listaActividadesCompletadas.map((activity) => (
-                        <div key={activity.id} className="progress-itemHome">
+                        {listaLeccionesCompletadas.map((leccion) => (
+                        <div key={leccion.id} className="progress-itemHome">
                             <span className="material-icons">check_circle</span>
-                            <div className="progress-textHome">{activity.titleLesson}</div>
+                            <div className="progress-textHome">{leccion.titleLesson}</div>
+                            
                         </div>
                         ))}
                 </div>

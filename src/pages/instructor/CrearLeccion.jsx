@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useInstructorContent } from '../../context/InstructorContentContext';
+import BarraLateralDashboard from '../../components/instructor/BarraLateralDashboard';
 
 const CrearLeccion = () =>{
 
@@ -174,97 +175,105 @@ const CrearLeccion = () =>{
     };
 
     return (
-        <form className="course-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-            <label htmlFor="title">Título de la lección</label>
-            <input
-                type="text"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            </div>
-            
-            <div className="form-group">
-            <label htmlFor="titleNahuatl">Título en Náhuatl</label>
-            <input
-                type="text"
-                id="titleNahuatl"
-                value={titleNahuatl}
-                onChange={(e) => setTitleNahuatl(e.target.value)}
-            />
-            </div>
-            
-            <div className="form-group">
-            <label htmlFor="description">Descripción de la lección</label>
-            <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-            </div>
-            
-            <div className="form-group">
-            <label htmlFor="descriptionNahuatl">Descripción en Náhuatl</label>
-            <textarea
-                id="descriptionNahuatl"
-                value={descriptionNahuatl}
-                onChange={(e) => setDescriptionNahuatl(e.target.value)}
-            />
-            </div>
+        <div className="dashboard" >
+            <BarraLateralDashboard/>
+            <div className='main-content'>
+                <form className="course-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                <label htmlFor="title">Título de la lección</label>
+                <input
+                    type="text"
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                </div>
+                
+                <div className="form-group">
+                <label htmlFor="titleNahuatl">Título en Náhuatl</label>
+                <input
+                    type="text"
+                    id="titleNahuatl"
+                    value={titleNahuatl}
+                    onChange={(e) => setTitleNahuatl(e.target.value)}
+                />
+                </div>
+                
+                <div className="form-group">
+                <label htmlFor="description">Descripción de la lección</label>
+                <textarea
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                </div>
+                
+                <div className="form-group">
+                <label htmlFor="descriptionNahuatl">Descripción en Náhuatl</label>
+                <textarea
+                    id="descriptionNahuatl"
+                    value={descriptionNahuatl}
+                    onChange={(e) => setDescriptionNahuatl(e.target.value)}
+                />
+                </div>
 
-            <select
-                    name="typeContent"
-                    value={typeContent}
-                    onChange={(e) => setTypeContent(e.target.value)}
-                    className="seleccion__contentType"
-                    required
+                <select
+                        name="typeContent"
+                        value={typeContent}
+                        onChange={(e) => setTypeContent(e.target.value)}
+                        className="seleccion__contentType"
+                        required
+                    >
+                        <option value="">Selecciona el tipo de contenido</option>
+                        <option value="PDF">PDF</option>
+                        <option value="VIDEO">VIDEO</option>
+                        <option value="AUDIO">AUDIO</option>
+                        <option value="IMAGEN">IMAGEN</option>
+                </select> 
+                
+                <div className="form-group">
+                <label htmlFor="content">Contenido</label>
+                <input
+                    type="file"
+                    id="content"
+                    accept={
+                        typeContent === 'IMAGEN' ? 'image/*' :
+                        typeContent === 'VIDEO' ? 'video/*' :
+                        typeContent === 'AUDIO' ? 'audio/*' :
+                        typeContent === 'PDF' ? 'application/pdf' : '*'
+                    }
+                    onChange={(e)=>setFile(e.target.files[0])}
+                />
+                {file && (
+                <div className="file-preview">
+                        <small>Archivo seleccionado: {file.name}</small>
+                    </div>
+                    )}
+                </div>
+        
+                <button 
+                    type="submit" 
+                    className="submit-button"
+                    disabled={loading || uploading}
                 >
-                    <option value="">Selecciona el tipo de contenido</option>
-                    <option value="PDF">PDF</option>
-                    <option value="VIDEO">VIDEO</option>
-                    <option value="AUDIO">AUDIO</option>
-                    <option value="IMAGEN">IMAGEN</option>
-            </select> 
-            
-            <div className="form-group">
-            <label htmlFor="content">Contenido</label>
-            <input
-                type="file"
-                id="content"
-                accept={
-                    typeContent === 'IMAGEN' ? 'image/*' :
-                    typeContent === 'VIDEO' ? 'video/*' :
-                    typeContent === 'AUDIO' ? 'audio/*' :
-                    typeContent === 'PDF' ? 'application/pdf' : '*'
-                }
-                onChange={(e)=>setFile(e.target.files[0])}
-            />
-            {file && (
-            <div className="file-preview">
-                    <small>Archivo seleccionado: {file.name}</small>
-                </div>
+                    {loading || uploading ? (
+                    <span>Procesando...</span>
+                    ) : (
+                    'Crear Lección'
+                    )}
+                </button>
+                {uploading && (
+                    <div>
+                        <progress value={uploadProgress} max="100" />
+                        <span>{uploadProgress}%</span>
+                    </div>
                 )}
+            </form>
             </div>
-    
-            <button 
-                type="submit" 
-                className="submit-button"
-                disabled={loading || uploading}
-            >
-                {loading || uploading ? (
-                <span>Procesando...</span>
-                ) : (
-                'Crear Lección'
-                )}
-            </button>
-            {uploading && (
-                <div>
-                    <progress value={uploadProgress} max="100" />
-                    <span>{uploadProgress}%</span>
-                </div>
-            )}
-        </form>
+        </div>
+
+
+        
         );
 };
 
