@@ -13,7 +13,7 @@ const CrearTema = () =>{
     const [description, setDescription] = useState('');
     const [descriptionNahuatl, setDescriptionNahuatl] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const [menuOpen, setMenuOpen] = useState(false);
     const {isAuthenticated, user} = useAuth();
     const navigate= useNavigate();
     const {currentCourse} = useInstructorCourses();
@@ -88,9 +88,25 @@ const CrearTema = () =>{
 
     };
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
+    
+
     return (
         <div className="dashboard">
-            <BarraLateralDashboard/>
+            <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+            </div>
+
+            <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralDashboard/>
+            </div>
+            
             <div className="main-content">
                 <form className="course-form" onSubmit={handleSubmit}>
                 <div className="form-group">

@@ -1,4 +1,4 @@
-import {  useEffect } from "react";
+import {  useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useInstructorCourses } from "../../context/InstructorCoursesContext";
@@ -17,7 +17,7 @@ const Dashboard = () =>{
         loading, 
         error
     } = useInstructorCourses();
-
+    const [menuOpen, setMenuOpen] = useState(false);
     const {t} = useTranslation();
 
 
@@ -40,10 +40,24 @@ const Dashboard = () =>{
         navigate("/crear-curso");
     }
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
+
     return (
         <>
             <div className="dashboard">
-                <BarraLateralDashboard/>
+                <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralDashboard/>
+                </div>
                 <div className="main-content">
                     <div className="welcome-section">
                         <h1>{t('dashboard.welcome')} {user?.username || user?.name || 'Estudiante'}</h1>

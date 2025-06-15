@@ -19,7 +19,7 @@ const CrearCurso = () =>{
     const [loading, setLoading] = useState(false);
     const {isAuthenticated, user} = useAuth();
     const navigate= useNavigate();
-
+    const [menuOpen, setMenuOpen] = useState(false);
     useEffect(() => {
             if (!isAuthenticated) {
                 console.log("Usuario no autenticado, redirigiendo a login");
@@ -49,7 +49,9 @@ const CrearCurso = () =>{
         }
     }
 
-
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
 
 
     const handleSubmit = async (e) => {
@@ -121,7 +123,17 @@ const CrearCurso = () =>{
 
     return (
         <div className='dashboard'>
-            <BarraLateralDashboard/>
+            <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralDashboard/>
+            </div>
             <div className='main-content'>
                 <form className="course-form" onSubmit={handleSubmit}>
                     <div className="form-group">

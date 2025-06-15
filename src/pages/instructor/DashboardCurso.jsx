@@ -6,7 +6,7 @@ import { useInstructorCourses } from "../../context/InstructorCoursesContext";
 import { useInstructorContent } from "../../context/InstructorContentContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 
 const DashboardCurso = () => {
 
@@ -21,7 +21,7 @@ const DashboardCurso = () => {
     const navigate = useNavigate();
 
     const {user, isAuthenticated}= useAuth();
-
+    const [menuOpen, setMenuOpen] = useState(false);
     //Verificar autenticación
         useEffect(() => {
             if (!isAuthenticated) {
@@ -42,12 +42,24 @@ const DashboardCurso = () => {
         navigate("/vista-tema");
     };
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
     
-
     return(
         <>
             <div className="dashboard">
-                <BarraLateralDashboard/>
+                <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralDashboard/>
+                </div>
                 <div className="main-content">
                     <section className="section">
                         <h2 className="course-title">{currentCourse.title}</h2>

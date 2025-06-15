@@ -3,6 +3,7 @@
     background: var(--background);
     box-shadow: var(--shadow);
     padding: 24px 16px;
+    height: 100%;
 }
 
 .logo-container {
@@ -98,7 +99,6 @@
     color: var(--text-dark);
 }
 
-.lateralCursoTitle{
-    
+.page-title{
+    align-self: center;
 }
-

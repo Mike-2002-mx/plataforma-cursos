@@ -25,7 +25,7 @@ const VistaCurso = () => {
     } = useCourseContent();
     const { currentLanguage, changeLanguage } = useLanguage();
     const {t} = useTranslation();
-    
+    const [menuOpen, setMenuOpen] = useState(false);
     //Verificar autenticación del usuario
     useEffect(() => {
         if(!isAuthenticated){
@@ -48,6 +48,10 @@ const VistaCurso = () => {
         navigate('/tema');
     }
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
+
     if(loading){
         return <div className="loading">{t('vistaCurso.loadingTopics')}</div>;
     }
@@ -55,7 +59,17 @@ const VistaCurso = () => {
     return (
         <>
             <div className="dashboard">
-                <BarraLateralHome cursosInscritos={enrolledCourses} />
+                <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralHome/>
+                </div>
                 
                 <div className="main-content">
                     {error && <div className="error-message">{error}</div>}

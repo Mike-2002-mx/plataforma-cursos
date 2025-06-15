@@ -19,6 +19,8 @@ const PaginaLeccion = () =>{
         loading, 
     } = useCourseContent();
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
     // Verificar autenticación
     useEffect(() => {
         if (!isAuthenticated) {
@@ -52,10 +54,24 @@ const PaginaLeccion = () =>{
         
     };
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
+
     return(
         <>
             <div className="dashboard">
-                <BarraLateralHome/>
+                <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralHome/>
+                </div>
                 <div className="main-content">
                     <div className="lesson-header">
                         <h1>Tema: {currentTopic.titleTopic} </h1>

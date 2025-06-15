@@ -19,6 +19,7 @@ const BarraLateralHome = ({}) =>{
     const [avatar, setAvatar] = useState('');
 
     const {t} = useTranslation();
+
     //Verificar autenticación
     useEffect(() => {
         if(!isAuthenticated){

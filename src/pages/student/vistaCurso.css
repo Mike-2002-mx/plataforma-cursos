@@ -5,3 +5,48 @@
     color: var(--accent);
     font-weight: 700;
 }
+
+@media (max-width: 576px) {
+    .barra-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .barra-mobile-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .icon-mobile {
+        font-size: 28px;
+        color: #333;
+    }
+
+    .page-title-mobile {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: var(--accent);
+        margin: 0;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .logo {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+    }
+
+    .main-content{
+        padding: 0;
+        width: 100%;
+    }
+}

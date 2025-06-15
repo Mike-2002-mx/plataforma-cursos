@@ -3,7 +3,7 @@ import BarraLateralDashboard from "../../components/instructor/BarraLateralDashb
 import { useInstructorContent } from "../../context/InstructorContentContext";
 import { useInstructorCourses } from "../../context/InstructorCoursesContext";
 import { useAuth } from "../../context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import LeccionDetallesIns from "../../components/instructor/LeccionDetallesIns";
 
 const DashboardTema =() =>{
@@ -11,7 +11,7 @@ const DashboardTema =() =>{
     const {leccionesTema, temaActual} = useInstructorContent();
     const {isAuthenticated, user } = useAuth();
     const navigate = useNavigate();
-
+    const [menuOpen, setMenuOpen] = useState(false);
     //Verificar autenticación del usuario
     useEffect(() => {
         if(!isAuthenticated){
@@ -25,10 +25,25 @@ const DashboardTema =() =>{
         navigate('/crear-leccion')
     }
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
+
+
     return(
         <> 
             <div className="dashboard">
-                <BarraLateralDashboard/>
+                <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span class="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralDashboard/>
+                </div>
                 <div className="main-content">
                     <section className="section">
                         <h2 className="course-title">{temaActual.title}</h2>

@@ -6,9 +6,7 @@ import BarraLateralHome from "../../components/BarraLateralHome";
 import TarjetaCursoHome from "../../components/TarjetaCursoHome";
 import { useCourses } from "../../context/CoursesContext";
 import { useCourseContent } from "../../context/CourseContentContext";
-import axios from "axios";
 import './home.css';
-import LanguageSwitcher from "../../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
 
@@ -30,6 +28,8 @@ const Home =  () =>{
         totalLessonsComplete,
         totalTopicsComplete
     } = useCourseContent();
+    
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const {t} = useTranslation();
     // Verificar autenticación
@@ -55,14 +55,29 @@ const Home =  () =>{
         }
     };
 
+    const toggleButton = () => {
+        setMenuOpen(!menuOpen);
+    }
+
     if (loading) {
         return <div className="loading">{t('viewHome.loadingCourses')}</div>;
     }
-
+    
     return (
         <>
             <div className="dashboard">
-                <BarraLateralHome cursosInscritos={enrolledCourses} />
+
+                <div className="barra-mobile">
+                    <button onClick={toggleButton} className="barra-mobile-button">
+                        <span className="material-icons icon-mobile">menu</span>
+                    </button>
+                    <h1 className="page-title-mobile">Momachtia TIC</h1>
+                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                </div>
+
+                <div className= {menuOpen ? 'visible': 'oculto'} >
+                    <BarraLateralHome/>
+                </div>
             
                 <div className="main-content">
                     {error && <div className="error-message">{error}</div>}
