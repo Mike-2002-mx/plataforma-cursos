@@ -27,7 +27,7 @@ const BarraLateralDashboard = ({}) => {
         <>
             <div className="barra-lateral">
                 <div className="contenedor-logo">
-                    <img src="public/Logo.png" alt="Logo" className="logo"></img>
+                    <img src="https://res.cloudinary.com/do0g84jlj/image/upload/v1750138053/Logo_wz64ec.png" alt="Logo" className="logo"></img>
                     <h1 className="titulo-curso">Momachtia TIC</h1>
                 </div>
 

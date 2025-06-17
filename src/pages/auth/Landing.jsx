@@ -43,7 +43,7 @@ const Landing = () =>{
                 </div>
                 
                 <div className="contenedorImagen"> 
-                    <img src="public/imagen_artesanas.jpg" alt="Mujer cosiendo"/>
+                    <img src="https://res.cloudinary.com/do0g84jlj/image/upload/v1750138255/imagen_artesanas_sttbyf.jpg" alt="Mujer cosiendo"/>
                 </div>
             </div>
         </>

@@ -47,7 +47,7 @@ const BarraLateralHome = ({}) =>{
         <>
             <div className="sidebar">
                 <div className="logo-container">
-                    <img src="public/Logo.png" alt="Logo" className="logo"/>
+                    <img src="https://res.cloudinary.com/do0g84jlj/image/upload/v1750138053/Logo_wz64ec.png" alt="Logo" className="logo"/>
                     <h1 className="page-title">Momachtia TIC</h1>
                 </div>
                 
