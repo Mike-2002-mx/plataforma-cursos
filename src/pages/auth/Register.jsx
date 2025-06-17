@@ -70,9 +70,9 @@ const RegisterForm = () => {
 
         try {
             
-            const response = await axios.post('http://localhost:8080/api/auth/signup', formData);
+            const response = await axios.post('https://plataformacursos-production.up.railway.app/api/auth/signup', formData);
 
-            const loginResponse = await axios.post('http://localhost:8080/api/auth/signin', {
+            const loginResponse = await axios.post('https://plataformacursos-production.up.railway.app/api/auth/signin', {
                 email: formData.email,
                 password: formData.password,
             });

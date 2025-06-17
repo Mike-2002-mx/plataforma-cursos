@@ -36,7 +36,7 @@ export const CourseContentProvider = ({children}) => {
 
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/progressTopic/byUserAndLanguage/${user.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/progressTopic/byUserAndLanguage/${user.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                         'Accept-Language': currentLanguage
@@ -76,7 +76,7 @@ export const CourseContentProvider = ({children}) => {
             if(!user?.id || !user?.token) return;
 
             try {
-                const response = await axios.get(`http://localhost:8080/progressLesson/lessonsCompletedByUserAndLanguage/${user.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/progressLesson/lessonsCompletedByUserAndLanguage/${user.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                         'Accept-Language': currentLanguage
@@ -104,7 +104,7 @@ export const CourseContentProvider = ({children}) => {
             if(!user?.id || !user?.token) return;
 
             try {
-                const response = await axios.get(`http://localhost:8080/progressTopic/byUserAndLanguage/${user.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/progressTopic/byUserAndLanguage/${user.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                         'Accept-Language': currentLanguage
@@ -134,7 +134,7 @@ export const CourseContentProvider = ({children}) => {
 
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/progressLesson/byUserAndLanguage/${user.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/progressLesson/byUserAndLanguage/${user.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                         'Accept-Language': currentLanguage
@@ -193,7 +193,7 @@ export const CourseContentProvider = ({children}) => {
             return{success: false}
         }
         try {
-            const response  = await axios.post(`http://localhost:8080/progressLesson/completedLesson/${userId}/${lessonId}`,
+            const response  = await axios.post(`https://plataformacursos-production.up.railway.app/progressLesson/completedLesson/${userId}/${lessonId}`,
                 {}, // cuerpo vacío si no necesitas enviar datos
                 {
                     headers: {
@@ -236,7 +236,7 @@ export const CourseContentProvider = ({children}) => {
             return{success: false}
         }
         try {
-            const response  = await axios.post(`http://localhost:8080/progressTopic/completedTopic/${userId}/${topicId}`,
+            const response  = await axios.post(`https://plataformacursos-production.up.railway.app/progressTopic/completedTopic/${userId}/${topicId}`,
                 {}, // cuerpo vacío si no necesitas enviar datos
                 {
                     headers: {
@@ -286,7 +286,7 @@ export const CourseContentProvider = ({children}) => {
         try {
         // Refrescar temas
         if (currentCourse?.id && user?.id) {
-            const topicsResponse = await axios.get(`http://localhost:8080/progressTopic/byUserAndLanguage/${user.id}`, {
+            const topicsResponse = await axios.get(`https://plataformacursos-production.up.railway.app/progressTopic/byUserAndLanguage/${user.id}`, {
             headers: { 
                 Authorization: `Bearer ${user.token}`,
                 'Accept-Language': currentLanguage
@@ -302,7 +302,7 @@ export const CourseContentProvider = ({children}) => {
         
         // Refrescar lecciones
         if (currentTopic?.idTopic && user?.id) {
-            const lessonsResponse = await axios.get(`http://localhost:8080/progressLesson/byUserAndLanguage/${user.id}`, {
+            const lessonsResponse = await axios.get(`https://plataformacursos-production.up.railway.app/progressLesson/byUserAndLanguage/${user.id}`, {
                 headers: 
                 { 
                     Authorization: `Bearer ${user.token}`,

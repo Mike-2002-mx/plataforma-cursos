@@ -43,7 +43,7 @@ const CrearTema = () =>{
             };
 
             const topicResponse = await axios.post(
-                'http://localhost:8080/topics',
+                'https://plataformacursos-production.up.railway.app/topics',
                 topicData,
                 {
                     headers: {
@@ -60,7 +60,7 @@ const CrearTema = () =>{
                     topicId: newTopic.id
                 };
 
-                const topicTranslation = await axios.post('http://localhost:8080/topicTranslations', translationData, 
+                const topicTranslation = await axios.post('https://plataformacursos-production.up.railway.app/topicTranslations', translationData, 
                     {
                         headers: {
                             Authorization: `Bearer ${user.token}`

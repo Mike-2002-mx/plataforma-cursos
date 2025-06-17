@@ -26,7 +26,7 @@ export const CoursesProvider = ({children}) =>{
 
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:8080/courses/allCoursesByLanguage', {
+            const response = await axios.get('https://plataformacursos-production.up.railway.app/courses/allCoursesByLanguage', {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                     'Accept-Language': currentLanguage
@@ -48,7 +48,7 @@ export const CoursesProvider = ({children}) =>{
         if (!isAuthenticated || !user?.id || !user?.token) return [];
 
         try {
-            const response = await axios.get('http://localhost:8080/enrollments/student/user', {
+            const response = await axios.get('https://plataformacursos-production.up.railway.app/enrollments/student/user', {
                 params: { userId: user.id },
                 headers: {
                     Authorization: `Bearer ${user.token}`
@@ -112,7 +112,7 @@ export const CoursesProvider = ({children}) =>{
 
         try {
         const response = await axios.post(
-            'http://localhost:8080/enrollments',
+            'https://plataformacursos-production.up.railway.app/enrollments',
             { idUser: user.id, idCourse: courseId },
             {
             headers: {

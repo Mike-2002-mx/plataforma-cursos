@@ -30,7 +30,7 @@ export const InstructorContentProvider = ({children}) =>{
 
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/enrollments/course/course?courseId=${currentCourse.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/enrollments/course/course?courseId=${currentCourse.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
@@ -62,7 +62,7 @@ export const InstructorContentProvider = ({children}) =>{
 
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/topics/byCourse/${currentCourse.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/topics/byCourse/${currentCourse.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                         'Accept-Language': currentLanguage
@@ -97,7 +97,7 @@ export const InstructorContentProvider = ({children}) =>{
             console.log("temaActual.id:", temaActual?.id);
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8080/lessons/byTopicAndLanguage/${temaActual.id}`, {
+                const response = await axios.get(`https://plataformacursos-production.up.railway.app/lessons/byTopicAndLanguage/${temaActual.id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                         'Accept-Language': currentLanguage

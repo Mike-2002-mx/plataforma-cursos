@@ -21,7 +21,7 @@ export const InstructorCoursesProvider = ({children}) => {
 
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:8080/courses/byInstructorAndLanguaje/${user.id}`, {
+            const response = await axios.get(`https://plataformacursos-production.up.railway.app/courses/byInstructorAndLanguaje/${user.id}`, {
                 headers:{
                     Authorization: `Bearer ${user.token}`,
                     'Accept-Language': currentLanguage

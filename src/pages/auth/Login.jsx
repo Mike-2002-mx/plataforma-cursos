@@ -25,7 +25,7 @@ const Login = () =>{
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/signin', {email, password});
+            const response = await axios.post('https://plataformacursos-production.up.railway.app/api/auth/signin', {email, password});
             
             const userData = response.data;
             console.log("Respuesta del servidor: ", userData);

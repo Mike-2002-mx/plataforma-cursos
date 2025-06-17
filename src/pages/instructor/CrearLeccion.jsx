@@ -125,7 +125,7 @@ const CrearLeccion = () =>{
             };
 
             const lessonResponse = await axios.post(
-                'http://localhost:8080/lessons',
+                'https://plataformacursos-production.up.railway.app/lessons',
                 lessonData,
                 {
                     headers: {
@@ -142,7 +142,7 @@ const CrearLeccion = () =>{
                     idLesson: newLesson.id
                 };
 
-                const lessonTranslation = await axios.post('http://localhost:8080/lessonTranslations', translationData, 
+                const lessonTranslation = await axios.post('https://plataformacursos-production.up.railway.app/lessonTranslations', translationData, 
                     {
                         headers: {
                             Authorization: `Bearer ${user.token}`
