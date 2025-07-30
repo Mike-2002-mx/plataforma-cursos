@@ -8,9 +8,8 @@ import BarraLateralDashboard from '../../components/instructor/BarraLateralDashb
 
 const CrearCurso = () =>{
 
-    const preset_name = "abecedario";
-    const cloud_name = "do0g84jlj"
-
+    const preset_name = process.env.REACT_APP_PRESET_NAME;
+    const cloud_name =  process.env.REACT_APP_CLOUD_NAME;
     const [title, setTitle] = useState('');
     const [titleNahuatl, setTitleNahuatl] = useState('');
     const [description, setDescription] = useState('');
