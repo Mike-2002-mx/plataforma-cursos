@@ -18,7 +18,6 @@ dist-ssr
 *.vtt
 *.jpg
 *.jpeg
-*.png
 
 # Editor directories and files
 .vscode/*
