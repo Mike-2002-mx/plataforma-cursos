@@ -40,13 +40,13 @@ This project is built with the following technologies:
 
 ## Screenshots
 **Login Page**  
-![Login Page](./img/screenshot1.png)
+![Login Page](./public/screenshot1.png)
 
 **Lesson Video Page**  
-![Lesson Video Page](./img/screenshot2.png)
+![Lesson Video Page](./public/screenshot2.png)
 
 **Course Page with Translation**  
-![Course Page with Translation](./img/screenshot3.png)
+![Course Page with Translation](./public/screenshot3.png)
 
 ## Project Status
 ✅ Core backend features fully implemented
